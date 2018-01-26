@@ -75,4 +75,11 @@ public class AcceptCoinsTestSuite
 		vendingMachine.insertCoin(penny);
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void vendingMachineDoesNotAcceptFakeCoins()
+	{
+		vendingMachine.insertCoin(new FakeQuarter());
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
 }
