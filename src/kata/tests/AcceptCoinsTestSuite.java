@@ -1,6 +1,7 @@
 package kata.tests;
 
 import static org.junit.Assert.*;
+import kata.vendingMachine.VendingMachine;
 
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class AcceptCoinsTestSuite
 	public void whenVendingMachineHasNoCoinsInsertedDisplayShowsINSERTCOIN() 
 	{
 		VendingMachine vendingMachine = new VendingMachine();
-		assertEquals("INSERT COIN", vendingMachine.display);
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 
 }
