@@ -11,6 +11,7 @@ public class VendingMachine
 	private static final Float NO_COINS = new Float(0);
 	private static final Float NICKEL = new Float(.05);
 	private static final Float DIME = new Float(.10);
+	private static final Float QUARTER = new Float(.25);
 	
 	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 	
@@ -37,6 +38,10 @@ public class VendingMachine
 		else if(coin.getCoinSize() == CoinSize.DIME)
 		{
 			currentCoinAmount += DIME;
+		}
+		else if(coin.getCoinSize() == CoinSize.QUARTER)
+		{
+			currentCoinAmount += QUARTER;
 		}
 	}
 }
