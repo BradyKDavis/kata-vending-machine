@@ -29,5 +29,12 @@ public class AcceptCoinsTestSuite
 		vendingMachine.insertCoin(new Nickel());
 		assertEquals("0.05", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void whenVendingMachineAcceptsADimeItUpdatesDisplayToShow10Cents()
+	{
+		vendingMachine.insertCoin(new Dime());
+		assertEquals("0.10", vendingMachine.getDisplayMessage());
+	}
 
 }
