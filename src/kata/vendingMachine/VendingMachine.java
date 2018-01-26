@@ -1,11 +1,38 @@
 package kata.vendingMachine;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
+import kata.coins.CoinSize;
+import kata.coins.ICoin;
+
 public class VendingMachine 
 {
 	private static final String INSERT_COIN = "INSERT COIN";
+	private static final Float NO_COINS = new Float(0);
+	private static final Float NICKEL = new Float(.05);
+	
+	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
+	
+	private Float currentCoinAmount = NO_COINS;
 	
 	public String getDisplayMessage()
 	{
-		return INSERT_COIN;
+		if(currentCoinAmount == NO_COINS)
+		{
+			return INSERT_COIN;
+		}
+		else
+		{
+			return currencyFormat.format(currentCoinAmount);
+		}
+	}
+	
+	public void insertCoin(ICoin coin)
+	{
+		if(coin.getCoinSize() == CoinSize.NICKEL)
+		{
+			currentCoinAmount += NICKEL;
+		}
 	}
 }

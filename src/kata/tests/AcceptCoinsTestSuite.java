@@ -1,6 +1,7 @@
 package kata.tests;
 
 import static org.junit.Assert.*;
+import kata.coins.Nickel;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class AcceptCoinsTestSuite
 	public void whenVendingMachineAcceptsANickelItUpdatesDisplayToShow5Cents()
 	{
 		vendingMachine.insertCoin(new Nickel());
-		assertEquals(".05", vendingMachine.getDisplayMessage());
+		assertEquals("0.05", vendingMachine.getDisplayMessage());
 	}
 
 }
