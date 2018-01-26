@@ -1,4 +1,4 @@
-package kata.coins;
+package kata.coins.enums;
 
 public enum CoinSize 
 {
