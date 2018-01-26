@@ -4,5 +4,6 @@ public enum CoinSize
 {
 	NICKEL,
 	DIME,
-	QUARTER
+	QUARTER,
+	OTHER
 }

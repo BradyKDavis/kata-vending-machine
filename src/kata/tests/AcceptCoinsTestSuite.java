@@ -3,6 +3,7 @@ package kata.tests;
 import static org.junit.Assert.*;
 import kata.coins.Dime;
 import kata.coins.Nickel;
+import kata.coins.Penny;
 import kata.coins.Quarter;
 import kata.vendingMachine.VendingMachine;
 
@@ -72,6 +73,6 @@ public class AcceptCoinsTestSuite
 	public void vendingMachineDoesNotAcceptPenniesAndDoesNotIncreaseInValueWhenPennyAdded()
 	{
 		vendingMachine.insertCoin(penny);
-		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());d
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 }
