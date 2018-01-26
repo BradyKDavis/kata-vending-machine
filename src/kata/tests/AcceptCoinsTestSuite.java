@@ -2,6 +2,7 @@ package kata.tests;
 
 import static org.junit.Assert.*;
 import kata.coins.Dime;
+import kata.coins.FakeQuarter;
 import kata.coins.Nickel;
 import kata.coins.Penny;
 import kata.coins.Quarter;

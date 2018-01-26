@@ -3,19 +3,18 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class Penny implements ICoin 
-{
+public class FakeQuarter implements ICoin {
 
 	@Override
 	public CoinSize getCoinSize() 
 	{
-		return CoinSize.OTHER;
+		return CoinSize.QUARTER;
 	}
 
 	@Override
-	public CoinWeight getCoinWeight() {
-		// TODO Auto-generated method stub
-		return null;
+	public CoinWeight getCoinWeight() 
+	{
+		return CoinWeight.OTHER;
 	}
-
+	
 }

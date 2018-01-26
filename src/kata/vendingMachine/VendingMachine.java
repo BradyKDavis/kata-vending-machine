@@ -2,8 +2,9 @@ package kata.vendingMachine;
 
 import java.text.DecimalFormat;
 
-import kata.coins.CoinSize;
 import kata.coins.ICoin;
+import kata.coins.enums.CoinSize;
+import kata.coins.enums.CoinWeight;
 
 public class VendingMachine 
 {
@@ -39,9 +40,14 @@ public class VendingMachine
 		{
 			currentCoinAmount += DIME;
 		}
-		else if(coin.getCoinSize() == CoinSize.QUARTER)
+		else if(isQuarter(coin))
 		{
 			currentCoinAmount += QUARTER;
 		}
+	}
+	
+	private boolean isQuarter(ICoin coin)
+	{
+		return coin.getCoinSize() == CoinSize.QUARTER && coin.getCoinWeight() == CoinWeight.QUARTER;
 	}
 }
