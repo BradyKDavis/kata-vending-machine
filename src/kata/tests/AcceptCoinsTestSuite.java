@@ -38,4 +38,11 @@ public class AcceptCoinsTestSuite
 		assertEquals("0.10", vendingMachine.getDisplayMessage());
 	}
 
+	
+	@Test
+	public void whenVendingMachineAcceptsAQuarterItUpdatesDisplayToShow25Cents()
+	{
+		vendingMachine.insertCoin(new Quarter());
+		assertEquals("0.25", vendingMachine.getDisplayMessage());
+	}
 }
