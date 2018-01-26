@@ -2,5 +2,6 @@ package kata.coins;
 
 public enum CoinSize 
 {
-	NICKEL
+	NICKEL,
+	DIME
 }
