@@ -15,6 +15,7 @@ public class AcceptCoinsTestSuite
 	private Nickel nickel;
 	private Dime dime;
 	private Quarter quarter;
+	private Penny penny;
 	
 	@Before
 	public void setUp()
@@ -23,6 +24,7 @@ public class AcceptCoinsTestSuite
 		nickel = new Nickel();
 		dime = new Dime();
 		quarter = new Quarter();
+		penny = new Penny();
 	}
 	
 	@Test
@@ -64,5 +66,12 @@ public class AcceptCoinsTestSuite
 		vendingMachine.insertCoin(dime);
 		vendingMachine.insertCoin(quarter);
 		assertEquals("1.10", vendingMachine.getDisplayMessage());
+	}
+	
+	@Test
+	public void vendingMachineDoesNotAcceptPenniesAndDoesNotIncreaseInValueWhenPennyAdded()
+	{
+		vendingMachine.insertCoin(penny);
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());d
 	}
 }
