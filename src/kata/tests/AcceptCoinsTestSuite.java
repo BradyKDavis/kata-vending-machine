@@ -12,11 +12,17 @@ import org.junit.Test;
 public class AcceptCoinsTestSuite 
 {
 	private VendingMachine vendingMachine;
+	private Nickel nickel;
+	private Dime dime;
+	private Quarter quarter;
 	
 	@Before
 	public void setUp()
 	{
 		vendingMachine = new VendingMachine();
+		nickel = new Nickel();
+		dime = new Dime();
+		quarter = new Quarter();
 	}
 	
 	@Test
@@ -28,14 +34,14 @@ public class AcceptCoinsTestSuite
 	@Test
 	public void whenVendingMachineAcceptsANickelItUpdatesDisplayToShow5Cents()
 	{
-		vendingMachine.insertCoin(new Nickel());
+		vendingMachine.insertCoin(nickel);
 		assertEquals("0.05", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void whenVendingMachineAcceptsADimeItUpdatesDisplayToShow10Cents()
 	{
-		vendingMachine.insertCoin(new Dime());
+		vendingMachine.insertCoin(dime);
 		assertEquals("0.10", vendingMachine.getDisplayMessage());
 	}
 
@@ -43,7 +49,20 @@ public class AcceptCoinsTestSuite
 	@Test
 	public void whenVendingMachineAcceptsAQuarterItUpdatesDisplayToShow25Cents()
 	{
-		vendingMachine.insertCoin(new Quarter());
+		vendingMachine.insertCoin(quarter);
 		assertEquals("0.25", vendingMachine.getDisplayMessage());
+	}
+	
+	@Test
+	public void vendingMachineAcceptsMultipleDifferentCoinsAndUpdatesDisplayToCorrectTotal()
+	{
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(nickel);
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(quarter);
+		assertEquals("1.10", vendingMachine.getDisplayMessage());
 	}
 }
