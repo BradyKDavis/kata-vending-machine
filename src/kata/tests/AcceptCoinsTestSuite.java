@@ -91,4 +91,11 @@ public class AcceptCoinsTestSuite
 		vendingMachine.insertCoin(new FakeNickel());
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void vendingMachineDoesNotAcceptFakeDime()
+	{
+		vendingMachine.insertCoin(new FakeDime());
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
 }
