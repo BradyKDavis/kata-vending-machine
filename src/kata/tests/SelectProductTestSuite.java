@@ -80,5 +80,11 @@ public class SelectProductTestSuite
 		assertEquals(ProductType.CANDY, product.getProductType());
 	}
 	
-
+	@Test
+	public void whenProductHasDispensedVendingMachineReadsThankYou()
+	{
+		insertMoney(new Float(1));
+		vendingMachine.selectProduct(ProductType.COLA);
+		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
+	}
 }
