@@ -13,6 +13,7 @@ import org.junit.Test;
 
 public class SelectProductTestSuite 
 {
+	//System under test
 	private VendingMachine vendingMachine;
 	
 	private Quarter quarter;
@@ -68,5 +69,16 @@ public class SelectProductTestSuite
 		assertNotNull(product);
 		assertEquals(ProductType.CHIPS, product.getProductType());
 	}
+	
+	@Test
+	public void dispenseProductForCandyWithSixtyFiveCentsDispensesCandy()
+	{
+		insertMoney(new Float(.65));
+		vendingMachine.selectProduct(ProductType.CANDY);
+		product = vendingMachine.getDispensedProduct();
+		assertNotNull(product);
+		assertEquals(ProductType.CANDY, product.getProductType());
+	}
+	
 
 }
