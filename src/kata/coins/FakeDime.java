@@ -3,13 +3,13 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class FakeQuarter implements ICoin 
+public class FakeDime implements ICoin 
 {
 
 	@Override
 	public CoinSize getCoinSize() 
 	{
-		return CoinSize.QUARTER;
+		return CoinSize.DIME;
 	}
 
 	@Override
@@ -17,5 +17,5 @@ public class FakeQuarter implements ICoin
 	{
 		return CoinWeight.OTHER;
 	}
-	
+
 }

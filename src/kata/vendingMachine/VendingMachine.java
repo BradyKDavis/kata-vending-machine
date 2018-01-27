@@ -36,7 +36,7 @@ public class VendingMachine
 		{
 			currentCoinAmount += NICKEL;
 		}
-		else if(coin.getCoinSize() == CoinSize.DIME)
+		else if(isDime(coin))
 		{
 			currentCoinAmount += DIME;
 		}
@@ -49,6 +49,11 @@ public class VendingMachine
 	private boolean isNickel(ICoin coin)
 	{
 		return coin.getCoinSize() == CoinSize.NICKEL && coin.getCoinWeight() == CoinWeight.NICKEL;
+	}
+	
+	private boolean isDime(ICoin coin)
+	{
+		return coin.getCoinSize() == CoinSize.DIME && coin.getCoinWeight() == CoinWeight.DIME;
 	}
 	
 	private boolean isQuarter(ICoin coin)

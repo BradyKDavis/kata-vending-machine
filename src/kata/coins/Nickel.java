@@ -3,7 +3,8 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class Nickel implements ICoin {
+public class Nickel implements ICoin 
+{
 
 	@Override
 	public CoinSize getCoinSize() 

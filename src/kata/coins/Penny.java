@@ -14,8 +14,7 @@ public class Penny implements ICoin
 
 	@Override
 	public CoinWeight getCoinWeight() {
-		// TODO Auto-generated method stub
-		return null;
+		return CoinWeight.OTHER;
 	}
 
 }
