@@ -3,17 +3,15 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class Nickel implements ICoin {
+public class FakeNickel implements ICoin {
 
 	@Override
-	public CoinSize getCoinSize() 
-	{
-		return CoinSize.NICKEL;
+	public CoinSize getCoinSize() {
+		return CoinSize.OTHER;
 	}
 
 	@Override
-	public CoinWeight getCoinWeight() 
-	{
+	public CoinWeight getCoinWeight() {
 		return CoinWeight.NICKEL;
 	}
 

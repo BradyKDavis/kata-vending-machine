@@ -32,7 +32,7 @@ public class VendingMachine
 	
 	public void insertCoin(ICoin coin)
 	{
-		if(coin.getCoinSize() == CoinSize.NICKEL)
+		if(isNickel(coin))
 		{
 			currentCoinAmount += NICKEL;
 		}
@@ -44,6 +44,11 @@ public class VendingMachine
 		{
 			currentCoinAmount += QUARTER;
 		}
+	}
+	
+	private boolean isNickel(ICoin coin)
+	{
+		return coin.getCoinSize() == CoinSize.NICKEL && coin.getCoinWeight() == CoinWeight.NICKEL;
 	}
 	
 	private boolean isQuarter(ICoin coin)
