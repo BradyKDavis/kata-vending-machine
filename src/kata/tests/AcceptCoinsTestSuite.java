@@ -124,6 +124,7 @@ public class AcceptCoinsTestSuite
 		{
 			vendingMachine.insertCoin(coin);
 		}
-		AssertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray);
+		vendingMachine.insertCoin(nickel);
+		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 }

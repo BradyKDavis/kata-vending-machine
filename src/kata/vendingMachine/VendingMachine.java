@@ -1,6 +1,7 @@
 package kata.vendingMachine;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import kata.coins.ICoin;
 import kata.coins.enums.CoinSize;
@@ -18,6 +19,13 @@ public class VendingMachine
 	
 	private Float currentCoinAmount = NO_COINS;
 	
+	private ArrayList<ICoin> coinReturn;
+	
+	public VendingMachine()
+	{
+		coinReturn = new ArrayList<ICoin>();
+	}
+	
 	public String getDisplayMessage()
 	{
 		if(currentCoinAmount == NO_COINS)
@@ -28,6 +36,11 @@ public class VendingMachine
 		{
 			return currencyFormat.format(currentCoinAmount);
 		}
+	}
+	
+	public ArrayList<ICoin> getCoinReturn()
+	{
+		return coinReturn;
 	}
 	
 	public void insertCoin(ICoin coin)
@@ -43,6 +56,10 @@ public class VendingMachine
 		else if(isQuarter(coin))
 		{
 			currentCoinAmount += QUARTER;
+		}
+		else
+		{
+			coinReturn.add(coin);
 		}
 	}
 	
