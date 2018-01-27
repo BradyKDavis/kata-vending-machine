@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import kata.coins.ICoin;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
+import kata.products.ChipProduct;
 import kata.products.ColaProduct;
 import kata.products.IProduct;
 import kata.products.enums.ProductType;
@@ -70,7 +71,14 @@ public class VendingMachine
 	
 	public void selectProduct(ProductType product)
 	{
-		dispensedProduct = new ColaProduct();
+		if(product == ProductType.COLA)
+		{
+			dispensedProduct = new ColaProduct();
+		}
+		else if(product == ProductType.CHIPS)
+		{
+			dispensedProduct = new ChipProduct();
+		}
 	}
 	
 	public IProduct getDispensedProduct()
