@@ -1,10 +1,14 @@
 package kata.tests;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import kata.coins.Dime;
 import kata.coins.FakeDime;
 import kata.coins.FakeNickel;
 import kata.coins.FakeQuarter;
+import kata.coins.ICoin;
 import kata.coins.Nickel;
 import kata.coins.Penny;
 import kata.coins.Quarter;
@@ -15,11 +19,16 @@ import org.junit.Test;
 
 public class AcceptCoinsTestSuite 
 {
+	//System Under Test
 	private VendingMachine vendingMachine;
+	
 	private Nickel nickel;
 	private Dime dime;
 	private Quarter quarter;
 	private Penny penny;
+	private FakeNickel fakeNickel;
+	private FakeQuarter fakeQuarter;
+	private FakeDime fakeDime;
 	
 	@Before
 	public void setUp()
@@ -29,6 +38,9 @@ public class AcceptCoinsTestSuite
 		dime = new Dime();
 		quarter = new Quarter();
 		penny = new Penny();
+		fakeNickel = new FakeNickel();
+		fakeDime = new FakeDime();
+		fakeQuarter = new FakeQuarter();
 	}
 	
 	@Test
@@ -82,21 +94,36 @@ public class AcceptCoinsTestSuite
 	@Test
 	public void vendingMachineDoesNotAcceptFakeQuarter()
 	{
-		vendingMachine.insertCoin(new FakeQuarter());
+		vendingMachine.insertCoin(fakeQuarter);
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineDoesNotAcceptFakeNickel()
 	{
-		vendingMachine.insertCoin(new FakeNickel());
+		vendingMachine.insertCoin(fakeNickel);
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineDoesNotAcceptFakeDime()
 	{
-		vendingMachine.insertCoin(new FakeDime());
+		vendingMachine.insertCoin(fakeDime);
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
+	
+	@Test
+	public void vendingMachinePlacesUnacceptedCoinsIntoTheCoinReturn()
+	{
+		ArrayList<ICoin> coins = new ArrayList<ICoin>();
+		coins.add(fakeQuarter);
+		coins.add(fakeDime);
+		coins.add(fakeNickel);
+		coins.add(penny);
+		for(ICoin coin : coins)
+		{
+			vendingMachine.insertCoin(coin);
+		}
+		AssertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray);
 	}
 }
