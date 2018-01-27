@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import kata.coins.Dime;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
+import kata.products.enums.ProductType;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
@@ -49,9 +50,9 @@ public class SelectProductTestSuite
 	public void TestDispenseProductForColaWithOneDollarDispensesCola() 
 	{
 		insertMoney(1f);
-		vendingMachine.selectProduct(Product.COLA);
+		vendingMachine.selectProduct(ProductType.COLA);
 		assertNotNull(vendingMachine.getDispensedProduct());
-		assertEquals(Product.COLA, vendingMachine.getDispsensedProduct());
+		assertEquals(ProductType.COLA, vendingMachine.getDispensedProduct().getProductType());
 	}
 
 }

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import kata.coins.ICoin;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
+import kata.products.ColaProduct;
+import kata.products.IProduct;
+import kata.products.enums.ProductType;
 
 public class VendingMachine 
 {
@@ -20,6 +23,8 @@ public class VendingMachine
 	private Float currentCoinAmount = NO_COINS;
 	
 	private ArrayList<ICoin> coinReturn;
+	
+	private IProduct dispensedProduct = null;
 	
 	public VendingMachine()
 	{
@@ -63,6 +68,16 @@ public class VendingMachine
 		}
 	}
 	
+	public void selectProduct(ProductType product)
+	{
+		dispensedProduct = new ColaProduct();
+	}
+	
+	public IProduct getDispensedProduct()
+	{
+		return dispensedProduct;
+	}
+	
 	private boolean isNickel(ICoin coin)
 	{
 		return coin.getCoinSize() == CoinSize.NICKEL && coin.getCoinWeight() == CoinWeight.NICKEL;
@@ -77,4 +92,6 @@ public class VendingMachine
 	{
 		return coin.getCoinSize() == CoinSize.QUARTER && coin.getCoinWeight() == CoinWeight.QUARTER;
 	}
+
+
 }
