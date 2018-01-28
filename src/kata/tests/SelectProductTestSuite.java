@@ -115,4 +115,12 @@ public class SelectProductTestSuite
 		vendingMachine.selectProduct(ProductType.COLA);
 		assertNull(vendingMachine.getDispensedProduct());
 	}
+	
+	@Test
+	public void ifInsufficientMoneyProviedForProductThenDisplaysProductPrice()
+	{
+		insertMoney(new Double(.40));
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
+	}
 }
