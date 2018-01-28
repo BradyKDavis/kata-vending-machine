@@ -103,4 +103,16 @@ public class SelectProductTestSuite
 		vendingMachine.getDisplayMessage();
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void ifInsufficientMoneyProvidedForProductThenProductIsNotDispensed()
+	{
+		insertMoney(new Float(.50));
+		vendingMachine.selectProduct(ProductType.CANDY);
+		assertNull(vendingMachine.getDispensedProduct());
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertNull(vendingMachine.getDispensedProduct());
+		vendingMachine.selectProduct(ProductType.COLA);
+		assertNull(vendingMachine.getDispensedProduct());
+	}
 }
