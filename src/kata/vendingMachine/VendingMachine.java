@@ -1,6 +1,5 @@
 package kata.vendingMachine;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import com.google.inject.Inject;
@@ -14,6 +13,7 @@ import kata.products.ColaProduct;
 import kata.products.IProduct;
 import kata.products.enums.ProductType;
 import kata.vendingMachine.messageDisplay.IMessageDisplay;
+import kata.vendingMachine.productManager.IProductManager;
 
 public class VendingMachine 
 {
@@ -21,7 +21,6 @@ public class VendingMachine
 	private static final Float NICKEL = new Float(.05);
 	private static final Float DIME = new Float(.10);
 	private static final Float QUARTER = new Float(.25);
-	
 	
 	private Float currentCoinAmount = NO_COINS;
 	
@@ -31,10 +30,13 @@ public class VendingMachine
 	
 	private IMessageDisplay messageDisplay;
 	
+	private IProductManager productManager;
+	
 	@Inject
-	public VendingMachine(IMessageDisplay messageDisplay)
+	public VendingMachine(IMessageDisplay messageDisplay, IProductManager productManager)
 	{
 		this.messageDisplay = messageDisplay;
+		this.productManager = productManager;
 		coinReturn = new ArrayList<ICoin>();
 	}
 	
@@ -70,19 +72,22 @@ public class VendingMachine
 	
 	public void selectProduct(ProductType product)
 	{
-		if(product == ProductType.COLA)
+		if(productManager.getItemPrice(product) <= currentCoinAmount)
 		{
-			dispensedProduct = new ColaProduct();
+			if(product == ProductType.COLA)
+			{
+				dispensedProduct = new ColaProduct();
+			}
+			else if(product == ProductType.CHIPS)
+			{
+				dispensedProduct = new ChipProduct();
+			}
+			else if(product == ProductType.CANDY)
+			{
+				dispensedProduct = new CandyProduct();
+			}
+			messageDisplay.completeTransaction();
 		}
-		else if(product == ProductType.CHIPS)
-		{
-			dispensedProduct = new ChipProduct();
-		}
-		else if(product == ProductType.CANDY)
-		{
-			dispensedProduct = new CandyProduct();
-		}
-		messageDisplay.completeTransaction();
 	}
 	
 	public IProduct getDispensedProduct()

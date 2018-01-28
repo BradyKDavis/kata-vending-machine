@@ -5,4 +5,6 @@ import kata.products.enums.ProductType;
 public interface IProduct
 {
 	ProductType getProductType();
+	
+	Double getPrice();
 }

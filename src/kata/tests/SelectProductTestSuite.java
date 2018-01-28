@@ -38,21 +38,21 @@ public class SelectProductTestSuite
 		nickel = new Nickel();
 	}
 	
-	private void insertMoney(Float money)
+	private void insertMoney(Double money)
 	{
-		while(money >= .25f)
+		while(money >= new Double(.25))
 		{
-			money -= .25f;
+			money -= new Double(.25);
 			vendingMachine.insertCoin(quarter);
 		}
-		while(money >= .1f)
+		while(money >= new Double(.10))
 		{
-			money -= .1f;
+			money -= new Double(.10);
 			vendingMachine.insertCoin(dime);
 		}
-		while(money >= .05f)
+		while(money >= new Double(.05))
 		{
-			money -= .05f;
+			money -= new Double(.05);
 			vendingMachine.insertCoin(nickel);
 		}
 	}
@@ -60,7 +60,7 @@ public class SelectProductTestSuite
 	@Test
 	public void dispenseProductForColaWithOneDollarDispensesCola() 
 	{
-		insertMoney(new Float(1));
+		insertMoney(new Double(1));
 		vendingMachine.selectProduct(ProductType.COLA);
 		product = vendingMachine.getDispensedProduct();
 		assertNotNull(product);
@@ -70,7 +70,7 @@ public class SelectProductTestSuite
 	@Test 
 	public void dispenseProductForChipsWithFiftyCentsDispensesChips()
 	{
-		insertMoney(new Float(.50));
+		insertMoney(new Double(.5));
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		product = vendingMachine.getDispensedProduct();
 		assertNotNull(product);
@@ -78,9 +78,9 @@ public class SelectProductTestSuite
 	}
 	
 	@Test
-	public void dispenseProductForCandyWithSixtyFiveCentsDispensesCandy()
+	public void dispenseProductForCandyWithSixtyCentsDispensesCandy()
 	{
-		insertMoney(new Float(.65));
+		insertMoney(new Double(.65));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		product = vendingMachine.getDispensedProduct();
 		assertNotNull(product);
@@ -90,7 +90,7 @@ public class SelectProductTestSuite
 	@Test
 	public void whenProductHasDispensedVendingMachineReadsThankYou()
 	{
-		insertMoney(new Float(1));
+		insertMoney(new Double(1));
 		vendingMachine.selectProduct(ProductType.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
 	}
@@ -98,7 +98,7 @@ public class SelectProductTestSuite
 	@Test
 	public void afterVendingMachineReadsThankYouItThenReadsInsertCoin()
 	{
-		insertMoney(new Float(.65));
+		insertMoney(new Double(.65));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		vendingMachine.getDisplayMessage();
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
@@ -107,7 +107,7 @@ public class SelectProductTestSuite
 	@Test
 	public void ifInsufficientMoneyProvidedForProductThenProductIsNotDispensed()
 	{
-		insertMoney(new Float(.40));
+		insertMoney(new Double(.40));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		assertNull(vendingMachine.getDispensedProduct());
 		vendingMachine.selectProduct(ProductType.CHIPS);
