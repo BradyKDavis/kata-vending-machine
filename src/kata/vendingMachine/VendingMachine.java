@@ -17,13 +17,11 @@ import kata.vendingMachine.messageDisplay.IMessageDisplay;
 
 public class VendingMachine 
 {
-	private static final String INSERT_COIN = "INSERT COIN";
 	private static final Float NO_COINS = new Float(0);
 	private static final Float NICKEL = new Float(.05);
 	private static final Float DIME = new Float(.10);
 	private static final Float QUARTER = new Float(.25);
 	
-	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 	
 	private Float currentCoinAmount = NO_COINS;
 	
@@ -54,15 +52,15 @@ public class VendingMachine
 	{
 		if(isNickel(coin))
 		{
-			currentCoinAmount += NICKEL;
+			addMoney(NICKEL);
 		}
 		else if(isDime(coin))
 		{
-			currentCoinAmount += DIME;
+			addMoney(DIME);
 		}
 		else if(isQuarter(coin))
 		{
-			currentCoinAmount += QUARTER;
+			addMoney(QUARTER);
 		}
 		else
 		{
@@ -89,6 +87,12 @@ public class VendingMachine
 	public IProduct getDispensedProduct()
 	{
 		return dispensedProduct;
+	}
+	
+	private void addMoney(Float value)
+	{
+		currentCoinAmount += value;
+		messageDisplay.addMoney(value);
 	}
 	
 	private boolean isNickel(ICoin coin)
