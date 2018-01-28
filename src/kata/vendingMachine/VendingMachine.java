@@ -42,14 +42,7 @@ public class VendingMachine
 	
 	public String getDisplayMessage()
 	{
-		if(currentCoinAmount == NO_COINS)
-		{
-			return INSERT_COIN;
-		}
-		else
-		{
-			return currencyFormat.format(currentCoinAmount);
-		}
+		return messageDisplay.getMessage();
 	}
 	
 	public ArrayList<ICoin> getCoinReturn()
