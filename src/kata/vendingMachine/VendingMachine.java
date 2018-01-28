@@ -82,6 +82,7 @@ public class VendingMachine
 		{
 			dispensedProduct = new CandyProduct();
 		}
+		messageDisplay.completeTransaction();
 	}
 	
 	public IProduct getDispensedProduct()
