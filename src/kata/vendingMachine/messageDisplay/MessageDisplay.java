@@ -14,9 +14,17 @@ public class MessageDisplay implements IMessageDisplay
 	
 	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 	
+	private boolean completedTransaction = false;
+	
 	@Override
 	public String getMessage()
 	{
+		if(completedTransaction)
+		{
+			completedTransaction = false;
+			message = INSERT_COINS;
+			return THANK_YOU;
+		}
 		return message;
 	}
 
@@ -30,7 +38,7 @@ public class MessageDisplay implements IMessageDisplay
 	public void completeTransaction()
 	{
 		currentMoney = ZERO;
-		message = THANK_YOU;
+		completedTransaction = true;
 	}
 
 }
