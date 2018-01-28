@@ -12,13 +12,19 @@ import kata.coins.ICoin;
 import kata.coins.Nickel;
 import kata.coins.Penny;
 import kata.coins.Quarter;
+import kata.dependency.KataDependencyModule;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 public class AcceptCoinsTestSuite 
 {
+	private Injector injector;
+	
 	//System Under Test
 	private VendingMachine vendingMachine;
 	
@@ -33,7 +39,8 @@ public class AcceptCoinsTestSuite
 	@Before
 	public void setUp()
 	{
-		vendingMachine = new VendingMachine();
+		injector = Guice.createInjector(new KataDependencyModule());
+		vendingMachine = injector.getInstance(VendingMachine.class);
 		nickel = new Nickel();
 		dime = new Dime();
 		quarter = new Quarter();

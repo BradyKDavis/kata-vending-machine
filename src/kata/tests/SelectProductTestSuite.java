@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import kata.coins.Dime;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
+import kata.dependency.KataDependencyModule;
 import kata.products.IProduct;
 import kata.products.enums.ProductType;
 import kata.vendingMachine.VendingMachine;
@@ -11,8 +12,13 @@ import kata.vendingMachine.VendingMachine;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 public class SelectProductTestSuite 
 {
+	private Injector injector;
+	
 	//System under test
 	private VendingMachine vendingMachine;
 	
@@ -25,7 +31,8 @@ public class SelectProductTestSuite
 	@Before
 	public void setup()
 	{
-		vendingMachine = new VendingMachine();
+		injector = Guice.createInjector(new KataDependencyModule());
+		vendingMachine = injector.getInstance(VendingMachine.class);
 		quarter = new Quarter();
 		dime = new Dime();
 		nickel = new Nickel();

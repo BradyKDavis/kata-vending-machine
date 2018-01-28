@@ -3,6 +3,8 @@ package kata.vendingMachine;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import com.google.inject.Inject;
+
 import kata.coins.ICoin;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
@@ -11,6 +13,7 @@ import kata.products.ChipProduct;
 import kata.products.ColaProduct;
 import kata.products.IProduct;
 import kata.products.enums.ProductType;
+import kata.vendingMachine.messageDisplay.IMessageDisplay;
 
 public class VendingMachine 
 {
@@ -28,8 +31,12 @@ public class VendingMachine
 	
 	private IProduct dispensedProduct = null;
 	
-	public VendingMachine()
+	private IMessageDisplay messageDisplay;
+	
+	@Inject
+	public VendingMachine(IMessageDisplay messageDisplay)
 	{
+		this.messageDisplay = messageDisplay;
 		coinReturn = new ArrayList<ICoin>();
 	}
 	
