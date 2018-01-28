@@ -107,7 +107,7 @@ public class SelectProductTestSuite
 	@Test
 	public void ifInsufficientMoneyProvidedForProductThenProductIsNotDispensed()
 	{
-		insertMoney(new Float(.50));
+		insertMoney(new Float(.40));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		assertNull(vendingMachine.getDispensedProduct());
 		vendingMachine.selectProduct(ProductType.CHIPS);
