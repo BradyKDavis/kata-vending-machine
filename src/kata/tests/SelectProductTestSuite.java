@@ -94,4 +94,13 @@ public class SelectProductTestSuite
 		vendingMachine.selectProduct(ProductType.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void afterVendingMachineReadsThankYouItThenReadsInsertCoin()
+	{
+		insertMoney(new Float(.65));
+		vendingMachine.selectProduct(ProductType.CANDY);
+		vendingMachine.getDisplayMessage();
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
 }
