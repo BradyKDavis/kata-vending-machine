@@ -53,11 +53,20 @@ public class MakeChangeTestSuite
 	}
 	
 	@Test
-	public void whenProductPurchasedWithDimeOverCoinReturnContainsNickel()
+	public void whenProductPurchasedWithDimeOverCoinReturnContainsDime()
 	{
 		insertMoney(new Double(1.10));
 		vendingMachine.selectProduct(ProductType.COLA);
 		coins.add(dime);
+		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
+	}
+	
+	@Test
+	public void whenProductPurchasedWithQuarterOverCoinReturnContainsQuarter()
+	{
+		insertMoney(new Double(.9));
+		vendingMachine.selectProduct(ProductType.CANDY);
+		coins.add(quarter);
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 	
