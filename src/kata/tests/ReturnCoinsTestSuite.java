@@ -9,6 +9,7 @@ import kata.coins.ICoin;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
 import kata.dependency.KataDependencyModule;
+import kata.products.enums.ProductType;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
@@ -60,6 +61,16 @@ public class ReturnCoinsTestSuite
 		}
 		vendingMachine.returnCoins();
 		assertEquals(coins, vendingMachine.getCoinReturn());
+	}
+	
+	@Test
+	public void whenReturnCoinsPressedWithCoinsInsertedVendingMachineDoesNotRetainBalance()
+	{
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.returnCoins();
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertNull(vendingMachine.getDispensedProduct());
 	}
 
 }
