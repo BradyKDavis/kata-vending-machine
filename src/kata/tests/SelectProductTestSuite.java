@@ -123,4 +123,12 @@ public class SelectProductTestSuite
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void afterProductPriceDisplayedWithZeroMoneyInsertCoinIsDisplayed()
+	{
+		vendingMachine.selectProduct(ProductType.CANDY);
+		assertEquals("PRICE 0.65", vendingMachine.getDisplayMessage());
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
 }
