@@ -3,7 +3,7 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class FakeDime implements ICoin 
+public class FakeDime extends AbstractCoin
 {
 
 	@Override

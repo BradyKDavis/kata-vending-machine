@@ -3,7 +3,7 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class Penny implements ICoin 
+public class Penny extends AbstractCoin
 {
 
 	@Override

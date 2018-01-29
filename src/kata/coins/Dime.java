@@ -3,7 +3,7 @@ package kata.coins;
 import kata.coins.enums.CoinSize;
 import kata.coins.enums.CoinWeight;
 
-public class Dime implements ICoin 
+public class Dime extends AbstractCoin
 {
 
 	@Override
