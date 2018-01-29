@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import kata.coins.Dime;
 import kata.coins.ICoin;
+import kata.coins.Nickel;
+import kata.coins.Quarter;
 import kata.dependency.KataDependencyModule;
 import kata.vendingMachine.VendingMachine;
 
@@ -18,6 +21,10 @@ public class ReturnCoinsTestSuite
 {
 	private Injector injector;
 	
+	private Nickel nickel;
+	private Dime dime;
+	private Quarter quarter;
+	
 	//System under test
 	private VendingMachine vendingMachine;
 	
@@ -26,14 +33,33 @@ public class ReturnCoinsTestSuite
 	{
 		injector = Guice.createInjector(new KataDependencyModule());
 		vendingMachine = injector.getInstance(VendingMachine.class);
+		nickel = new Nickel();
+		dime = new Dime();
+		quarter = new Quarter();
 	}
 
 	@Test
 	public void whenReturnCoinsPressedWithNoCoinsInsertedNoCoinsReturned()
 	{
 		ArrayList<ICoin> expected = new ArrayList<ICoin>();
-		ArrayList<ICoin> actual = vendingMachine.returnCoins();
+		vendingMachine.returnCoins();
+		ArrayList<ICoin> actual = vendingMachine.getCoinReturn();
 		assertArrayEquals(expected.toArray(), actual.toArray());
+	}
+	
+	@Test 
+	public void whenReturnCoinsPressedWithCoinsInsertedThoseCoinsAreReturned()
+	{
+		ArrayList<ICoin> coins = new ArrayList<ICoin>();
+		coins.add(nickel);
+		coins.add(dime);
+		coins.add(quarter);
+		for(ICoin coin : coins)
+		{
+			vendingMachine.insertCoin(coin);
+		}
+		vendingMachine.returnCoins();
+		assertEquals(coins, vendingMachine.getCOinReturn)
 	}
 
 }

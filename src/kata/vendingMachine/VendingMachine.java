@@ -127,9 +127,9 @@ public class VendingMachine
 		return coin.getCoinSize() == CoinSize.QUARTER && coin.getCoinWeight() == CoinWeight.QUARTER;
 	}
 
-	public ArrayList<ICoin> returnCoins()
+	public void returnCoins()
 	{
-		return coinReturn.getCoinsReturned();
+		
 	}
 
 
