@@ -1,5 +1,6 @@
 package kata.vendingMachine.messageDisplay;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
 public class MessageDisplay implements IMessageDisplay
@@ -7,9 +8,9 @@ public class MessageDisplay implements IMessageDisplay
 	private static final String INSERT_COINS = "INSERT COIN";
 	private static final String THANK_YOU = "THANK YOU";
 	private static final String PRICE = "PRICE ";
-	private static final Double ZERO = new Double(0);
+	private static final BigDecimal ZERO = new BigDecimal("0.00");
 	
-	private Double currentMoney = ZERO;
+	private BigDecimal currentMoney = ZERO;
 	
 	private String message = INSERT_COINS;
 	
@@ -23,7 +24,7 @@ public class MessageDisplay implements IMessageDisplay
 		if(respondToUserInteraction)
 		{
 			String currentMessage = message;
-			if(currentMoney > ZERO)
+			if(currentMoney.compareTo(ZERO) > 0)
 			{
 				message = currencyFormat.format(currentMoney);
 			}
@@ -37,9 +38,9 @@ public class MessageDisplay implements IMessageDisplay
 	}
 
 	@Override
-	public void addMoney(Float value)
+	public void addMoney(BigDecimal value)
 	{
-		currentMoney += value;
+		currentMoney = currentMoney.add(value);
 		message = currencyFormat.format(currentMoney);
 	}
 	
@@ -50,7 +51,7 @@ public class MessageDisplay implements IMessageDisplay
 		message = THANK_YOU;
 	}
 	
-	public void reportPrice(Double price)
+	public void reportPrice(BigDecimal price)
 	{
 		message = PRICE + currencyFormat.format(price);
 		respondToUserInteraction = true;

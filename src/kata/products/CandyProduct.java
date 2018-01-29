@@ -1,10 +1,12 @@
 package kata.products;
 
+import java.math.BigDecimal;
+
 import kata.products.enums.ProductType;
 
 public class CandyProduct implements IProduct
 {
-	private final Double price = new Double(.65);
+	private final BigDecimal price = new BigDecimal(".65");
 	@Override
 	public ProductType getProductType()
 	{
@@ -12,7 +14,7 @@ public class CandyProduct implements IProduct
 	}
 
 	@Override
-	public Double getPrice()
+	public BigDecimal getPrice()
 	{
 		return price;
 	}

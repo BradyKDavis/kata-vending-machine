@@ -1,6 +1,9 @@
 package kata.tests;
 
 import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+
 import kata.coins.Dime;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
@@ -17,6 +20,10 @@ import com.google.inject.Injector;
 
 public class SelectProductTestSuite 
 {
+	private static final BigDecimal QUARTER_VALUE = new BigDecimal(".25");
+	private static final BigDecimal DIME_VALUE = new BigDecimal(".10");
+	private static final BigDecimal NICKEL_VALUE = new BigDecimal(".05");
+	
 	private Injector injector;
 	
 	//System under test
@@ -38,21 +45,21 @@ public class SelectProductTestSuite
 		nickel = new Nickel();
 	}
 	
-	private void insertMoney(Double money)
+	private void insertMoney(BigDecimal money)
 	{
-		while(money >= new Double(.25))
+		while(money.compareTo(QUARTER_VALUE) >= 0)
 		{
-			money -= new Double(.25);
+			money = money.subtract(QUARTER_VALUE);
 			vendingMachine.insertCoin(quarter);
 		}
-		while(money >= new Double(.10))
+		while(money.compareTo(DIME_VALUE) >= 0)
 		{
-			money -= new Double(.10);
+			money = money.subtract(DIME_VALUE);
 			vendingMachine.insertCoin(dime);
 		}
-		while(money >= new Double(.05))
+		while(money.compareTo(NICKEL_VALUE) >= 0)
 		{
-			money -= new Double(.05);
+			money = money.subtract(NICKEL_VALUE);
 			vendingMachine.insertCoin(nickel);
 		}
 	}
@@ -60,7 +67,7 @@ public class SelectProductTestSuite
 	@Test
 	public void dispenseProductForColaWithOneDollarDispensesCola() 
 	{
-		insertMoney(new Double(1));
+		insertMoney(new BigDecimal("1.00"));
 		vendingMachine.selectProduct(ProductType.COLA);
 		product = vendingMachine.getDispensedProduct();
 		assertNotNull(product);
@@ -70,7 +77,7 @@ public class SelectProductTestSuite
 	@Test 
 	public void dispenseProductForChipsWithFiftyCentsDispensesChips()
 	{
-		insertMoney(new Double(.5));
+		insertMoney(new BigDecimal("0.50"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		product = vendingMachine.getDispensedProduct();
 		assertNotNull(product);
@@ -80,7 +87,7 @@ public class SelectProductTestSuite
 	@Test
 	public void dispenseProductForCandyWithSixtyCentsDispensesCandy()
 	{
-		insertMoney(new Double(.65));
+		insertMoney(new BigDecimal("0.65"));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		product = vendingMachine.getDispensedProduct();
 		assertNotNull(product);
@@ -90,7 +97,7 @@ public class SelectProductTestSuite
 	@Test
 	public void whenProductHasDispensedVendingMachineReadsThankYou()
 	{
-		insertMoney(new Double(1));
+		insertMoney(new BigDecimal("1.00"));
 		vendingMachine.selectProduct(ProductType.COLA);
 		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
 	}
@@ -98,7 +105,7 @@ public class SelectProductTestSuite
 	@Test
 	public void afterVendingMachineReadsThankYouItThenReadsInsertCoin()
 	{
-		insertMoney(new Double(.65));
+		insertMoney(new BigDecimal("0.65"));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		vendingMachine.getDisplayMessage();
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
@@ -107,7 +114,7 @@ public class SelectProductTestSuite
 	@Test
 	public void ifInsufficientMoneyProvidedForProductThenProductIsNotDispensed()
 	{
-		insertMoney(new Double(.40));
+		insertMoney(new BigDecimal("0.40"));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		assertNull(vendingMachine.getDispensedProduct());
 		vendingMachine.selectProduct(ProductType.CHIPS);
@@ -119,7 +126,7 @@ public class SelectProductTestSuite
 	@Test
 	public void ifInsufficientMoneyProviedForProductThenDisplaysProductPrice()
 	{
-		insertMoney(new Double(.40));
+		insertMoney(new BigDecimal("0.40"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
 	}
@@ -135,7 +142,7 @@ public class SelectProductTestSuite
 	@Test
 	public void afterProductPriceDisplayedWithMoneyInsertedCurrentBalanceIsDisplayed()
 	{
-		insertMoney(new Double(.40));
+		insertMoney(new BigDecimal("0.40"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
 		assertEquals("0.40", vendingMachine.getDisplayMessage());

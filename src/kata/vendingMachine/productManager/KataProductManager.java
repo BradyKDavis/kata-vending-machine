@@ -1,5 +1,6 @@
 package kata.vendingMachine.productManager;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 import kata.products.CandyProduct;
@@ -17,9 +18,9 @@ public class KataProductManager implements IProductManager
 		buildProductsList();
 	}
 	
-	public Double getItemPrice(ProductType productType)
+	public BigDecimal getItemPrice(ProductType productType)
 	{
-		Double price = new Double(0);
+		BigDecimal price = new BigDecimal("0.00");
 		IProduct product = products.get(productType);
 		if(product != null)
 		{

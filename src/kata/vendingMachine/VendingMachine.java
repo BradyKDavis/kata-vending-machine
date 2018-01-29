@@ -1,5 +1,6 @@
 package kata.vendingMachine;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import com.google.inject.Inject;
@@ -18,12 +19,12 @@ import kata.vendingMachine.productManager.IProductManager;
 
 public class VendingMachine 
 {
-	private static final Float NO_COINS = new Float(0);
-	private static final Float NICKEL = new Float(.05);
-	private static final Float DIME = new Float(.10);
-	private static final Float QUARTER = new Float(.25);
+	private static final BigDecimal NO_COINS = new BigDecimal("0.00");
+	private static final BigDecimal NICKEL = new BigDecimal("0.05");
+	private static final BigDecimal DIME = new BigDecimal("0.10");
+	private static final BigDecimal QUARTER = new BigDecimal("0.25");
 	
-	private Float currentCoinAmount = NO_COINS;
+	private BigDecimal currentCoinAmount = NO_COINS;
 	
 	
 	private IProduct dispensedProduct = null;
@@ -75,8 +76,8 @@ public class VendingMachine
 	
 	public void selectProduct(ProductType product)
 	{
-		Double price = productManager.getItemPrice(product);
-		if(price <= currentCoinAmount)
+		BigDecimal price = productManager.getItemPrice(product);
+		if(price.compareTo(currentCoinAmount) <= 0)
 		{
 			if(product == ProductType.COLA)
 			{
@@ -90,7 +91,7 @@ public class VendingMachine
 			{
 				dispensedProduct = new CandyProduct();
 			}
-			coinReturn.addChange(currentCoinAmount - dispensedProduct.getPrice());
+			coinReturn.addChange(currentCoinAmount.subtract(dispensedProduct.getPrice()));
 			currentCoinAmount = NO_COINS;
 			messageDisplay.completeTransaction();
 		}
@@ -105,10 +106,10 @@ public class VendingMachine
 		return dispensedProduct;
 	}
 	
-	private void addMoney(Float value)
+	private void addMoney(BigDecimal money)
 	{
-		currentCoinAmount += value;
-		messageDisplay.addMoney(value);
+		currentCoinAmount = currentCoinAmount.add(money);
+		messageDisplay.addMoney(money);
 	}
 	
 	private boolean isNickel(ICoin coin)
