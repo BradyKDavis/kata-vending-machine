@@ -59,11 +59,20 @@ public class SoldOutTestSuite
 		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
 	}
 	
-	@Test public void whenVendingMachineIsOutOfStockAndNoCoinsAreInsertedMessageDisplayReadsSoldOutNotPrice()
+	@Test 
+	public void whenVendingMachineIsOutOfStockAndNoCoinsAreInsertedMessageDisplayReadsSoldOutNotPrice()
 	{
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		assertNull(vendingMachine.getDispensedProduct());
 		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
+	}
+	
+	@Test
+	public void whenVendingMachineIsOutOfStockAndNoCoinsInsertedSelectCoinsReadsAfterSoldOut()
+	{
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	private void insertMoney(BigDecimal money)
