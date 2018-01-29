@@ -129,7 +129,7 @@ public class VendingMachine
 
 	public void returnCoins()
 	{
-		
+		coinReturn.addChange(currentCoinAmount);
 	}
 
 
