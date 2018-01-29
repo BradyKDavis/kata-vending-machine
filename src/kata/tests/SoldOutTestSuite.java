@@ -75,6 +75,15 @@ public class SoldOutTestSuite
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
+	@Test
+	public void whenVendingMachineIsOutOfStockAndCoinsInsertedCoinAmountReadsAfterSoldOut()
+	{
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.selectProduct(ProductType.CANDY);
+		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
+		assertEquals("0.25", vendingMachine.getDisplayMessage());
+	}
+	
 	private void insertMoney(BigDecimal money)
 	{
 		while(money.compareTo(QUARTER_VALUE) >= 0)
