@@ -8,4 +8,5 @@ public interface IMessageDisplay
 	
 	void completeTransaction();
 	
+	void reportPrice(Double price);
 }

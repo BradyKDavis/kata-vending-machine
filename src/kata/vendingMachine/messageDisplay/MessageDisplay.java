@@ -6,6 +6,7 @@ public class MessageDisplay implements IMessageDisplay
 {
 	private static final String INSERT_COINS = "INSERT COIN";
 	private static final String THANK_YOU = "THANK YOU";
+	private static final String PRICE = "PRICE ";
 	private static final Float ZERO = new Float(0);
 	
 	private float currentMoney = ZERO;
@@ -39,6 +40,11 @@ public class MessageDisplay implements IMessageDisplay
 	{
 		currentMoney = ZERO;
 		completedTransaction = true;
+	}
+	
+	public void reportPrice(Double price)
+	{
+		message = PRICE + currencyFormat.format(price);
 	}
 
 }

@@ -72,7 +72,8 @@ public class VendingMachine
 	
 	public void selectProduct(ProductType product)
 	{
-		if(productManager.getItemPrice(product) <= currentCoinAmount)
+		Double price = productManager.getItemPrice(product);
+		if(price <= currentCoinAmount)
 		{
 			if(product == ProductType.COLA)
 			{
@@ -87,6 +88,10 @@ public class VendingMachine
 				dispensedProduct = new CandyProduct();
 			}
 			messageDisplay.completeTransaction();
+		}
+		else
+		{
+			messageDisplay.reportPrice(price);
 		}
 	}
 	
