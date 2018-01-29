@@ -52,6 +52,15 @@ public class MakeChangeTestSuite
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 	
+	@Test
+	public void whenProductPurchasedWithDimeOverCoinReturnContainsNickel()
+	{
+		insertMoney(new Double(1.10));
+		vendingMachine.selectProduct(ProductType.COLA);
+		coins.add(dime);
+		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
+	}
+	
 	private void insertMoney(Double money)
 	{
 		while(money >= new Double(.25))
