@@ -7,6 +7,7 @@ public class MessageDisplay implements IMessageDisplay
 {
 	private static final String INSERT_COIN = "INSERT COIN";
 	private static final String THANK_YOU = "THANK YOU";
+	private static final String SOLD_OUT = "SOLD OUT";
 	private static final String PRICE = "PRICE ";
 	private static final BigDecimal ZERO = new BigDecimal("0.00");
 	
@@ -62,6 +63,12 @@ public class MessageDisplay implements IMessageDisplay
 	{
 		currentMoney = ZERO;
 		message = INSERT_COIN;
+	}
+
+	@Override
+	public void reportSoldOut()
+	{
+		message = SOLD_OUT;
 	}
 
 }

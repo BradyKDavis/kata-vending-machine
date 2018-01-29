@@ -85,7 +85,7 @@ public class VendingMachine
 		{
 			if(!productStock.hasProductInStock(product))
 			{
-				
+				messageDisplay.reportSoldOut();
 			}
 			else
 			{

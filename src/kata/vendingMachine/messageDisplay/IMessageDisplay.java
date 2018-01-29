@@ -13,4 +13,6 @@ public interface IMessageDisplay
 	void reportPrice(BigDecimal price);
 	
 	void cancelTransaction();
+
+	void reportSoldOut();
 }
