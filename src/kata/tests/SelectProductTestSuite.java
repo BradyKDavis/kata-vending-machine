@@ -131,4 +131,13 @@ public class SelectProductTestSuite
 		assertEquals("PRICE 0.65", vendingMachine.getDisplayMessage());
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
+	
+	@Test
+	public void afterProductPriceDisplayedWithMoneyInsertedCurrentBalanceIsDisplayed()
+	{
+		insertMoney(new Double(.40));
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
+		assertEquals("0.40", vendingMachine.getDisplayMessage());
+	}
 }
