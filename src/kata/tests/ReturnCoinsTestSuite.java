@@ -51,15 +51,15 @@ public class ReturnCoinsTestSuite
 	public void whenReturnCoinsPressedWithCoinsInsertedThoseCoinsAreReturned()
 	{
 		ArrayList<ICoin> coins = new ArrayList<ICoin>();
-		coins.add(nickel);
-		coins.add(dime);
 		coins.add(quarter);
+		coins.add(quarter);
+		coins.add(dime);
 		for(ICoin coin : coins)
 		{
 			vendingMachine.insertCoin(coin);
 		}
 		vendingMachine.returnCoins();
-		assertEquals(coins, vendingMachine.getCOinReturn)
+		assertEquals(coins, vendingMachine.getCoinReturn());
 	}
 
 }
