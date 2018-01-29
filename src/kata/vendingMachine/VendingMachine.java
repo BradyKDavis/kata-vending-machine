@@ -90,6 +90,8 @@ public class VendingMachine
 			{
 				dispensedProduct = new CandyProduct();
 			}
+			coinReturn.addChange(currentCoinAmount - dispensedProduct.getPrice());
+			currentCoinAmount = NO_COINS;
 			messageDisplay.completeTransaction();
 		}
 		else

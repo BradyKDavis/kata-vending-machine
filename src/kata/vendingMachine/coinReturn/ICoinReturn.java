@@ -9,4 +9,6 @@ public interface ICoinReturn
 	ArrayList<ICoin> getCoinsReturned();
 	
 	void addCoin(ICoin coin);
+	
+	void addChange(Double value);
 }

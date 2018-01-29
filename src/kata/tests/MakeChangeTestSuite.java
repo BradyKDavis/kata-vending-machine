@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import kata.coins.Dime;
 import kata.coins.ICoin;
 import kata.coins.Nickel;
+import kata.coins.Penny;
 import kata.coins.Quarter;
 import kata.dependency.KataDependencyModule;
 import kata.products.enums.ProductType;
