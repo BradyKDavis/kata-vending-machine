@@ -131,6 +131,7 @@ public class VendingMachine
 	{
 		coinReturn.addChange(currentCoinAmount);
 		currentCoinAmount = NO_COINS;
+		messageDisplay.cancelTransaction();
 	}
 
 

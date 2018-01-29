@@ -5,14 +5,14 @@ import java.text.DecimalFormat;
 
 public class MessageDisplay implements IMessageDisplay
 {
-	private static final String INSERT_COINS = "INSERT COIN";
+	private static final String INSERT_COIN = "INSERT COIN";
 	private static final String THANK_YOU = "THANK YOU";
 	private static final String PRICE = "PRICE ";
 	private static final BigDecimal ZERO = new BigDecimal("0.00");
 	
 	private BigDecimal currentMoney = ZERO;
 	
-	private String message = INSERT_COINS;
+	private String message = INSERT_COIN;
 	
 	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 	
@@ -30,7 +30,7 @@ public class MessageDisplay implements IMessageDisplay
 			}
 			else
 			{
-				message = INSERT_COINS;
+				message = INSERT_COIN;
 			}
 			return currentMessage;
 		}
@@ -55,6 +55,13 @@ public class MessageDisplay implements IMessageDisplay
 	{
 		message = PRICE + currencyFormat.format(price);
 		respondToUserInteraction = true;
+	}
+
+	@Override
+	public void cancelTransaction()
+	{
+		currentMoney = ZERO;
+		message = INSERT_COIN;
 	}
 
 }
