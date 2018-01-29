@@ -72,5 +72,14 @@ public class ReturnCoinsTestSuite
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		assertNull(vendingMachine.getDispensedProduct());
 	}
+	
+	@Test
+	public void whenReturnCoinsPressedWithCoinsInsertedTheMessageDisplayResetsToInsertMessage()
+	{
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.returnCoins();
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
 
 }
