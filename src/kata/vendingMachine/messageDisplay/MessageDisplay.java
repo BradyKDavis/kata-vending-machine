@@ -7,9 +7,9 @@ public class MessageDisplay implements IMessageDisplay
 	private static final String INSERT_COINS = "INSERT COIN";
 	private static final String THANK_YOU = "THANK YOU";
 	private static final String PRICE = "PRICE ";
-	private static final Float ZERO = new Float(0);
+	private static final Double ZERO = new Double(0);
 	
-	private float currentMoney = ZERO;
+	private Double currentMoney = ZERO;
 	
 	private String message = INSERT_COINS;
 	
@@ -23,7 +23,14 @@ public class MessageDisplay implements IMessageDisplay
 		if(respondToUserInteraction)
 		{
 			String currentMessage = message;
-			message = INSERT_COINS;
+			if(currentMoney > ZERO)
+			{
+				message = currencyFormat.format(currentMoney);
+			}
+			else
+			{
+				message = INSERT_COINS;
+			}
 			return currentMessage;
 		}
 		return message;
