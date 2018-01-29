@@ -11,7 +11,9 @@ public class KataFullTestSuite
 	@SuiteClasses({
 				AcceptCoinsTestSuite.class,
 				MakeChangeTestSuite.class,
-				SelectProductTestSuite.class
+				SelectProductTestSuite.class,
+				SoldOutTestSuite.class,
+				ExactChangeOnlyTestSuite.class
 				})
 	public class RunTestSuite 
 	{
