@@ -130,6 +130,7 @@ public class VendingMachine
 	public void returnCoins()
 	{
 		coinReturn.addChange(currentCoinAmount);
+		currentCoinAmount = NO_COINS;
 	}
 
 
