@@ -81,19 +81,16 @@ public class VendingMachine
 	public void selectProduct(ProductType product)
 	{
 		BigDecimal price = productManager.getItemPrice(product);
-		if(price.compareTo(currentCoinAmount) <= 0)
+		if(!productStock.hasProductInStock(product))
 		{
-			if(!productStock.hasProductInStock(product))
-			{
-				messageDisplay.reportSoldOut();
-			}
-			else
-			{
-				dispensedProduct = productStock.getProduct(product);
-				coinReturn.addChange(currentCoinAmount.subtract(dispensedProduct.getPrice()));
-				currentCoinAmount = NO_COINS;
-				messageDisplay.completeTransaction();
-			}
+			messageDisplay.reportSoldOut();
+		}
+		else if(price.compareTo(currentCoinAmount) <= 0)
+		{
+			dispensedProduct = productStock.getProduct(product);
+			coinReturn.addChange(currentCoinAmount.subtract(dispensedProduct.getPrice()));
+			currentCoinAmount = NO_COINS;
+			messageDisplay.completeTransaction();
 		}
 		else
 		{
