@@ -12,6 +12,7 @@ import kata.products.ChipProduct;
 import kata.products.ColaProduct;
 import kata.products.IProduct;
 import kata.products.enums.ProductType;
+import kata.vendingMachine.coinReturn.ICoinReturn;
 import kata.vendingMachine.messageDisplay.IMessageDisplay;
 import kata.vendingMachine.productManager.IProductManager;
 
@@ -24,7 +25,6 @@ public class VendingMachine
 	
 	private Float currentCoinAmount = NO_COINS;
 	
-	private ArrayList<ICoin> coinReturn;
 	
 	private IProduct dispensedProduct = null;
 	
@@ -32,12 +32,15 @@ public class VendingMachine
 	
 	private IProductManager productManager;
 	
+	private ICoinReturn coinReturn;
+	
 	@Inject
-	public VendingMachine(IMessageDisplay messageDisplay, IProductManager productManager)
+	public VendingMachine(IMessageDisplay messageDisplay, IProductManager productManager,
+			ICoinReturn coinReturn)
 	{
 		this.messageDisplay = messageDisplay;
 		this.productManager = productManager;
-		coinReturn = new ArrayList<ICoin>();
+		this.coinReturn = coinReturn;
 	}
 	
 	public String getDisplayMessage()
@@ -47,7 +50,7 @@ public class VendingMachine
 	
 	public ArrayList<ICoin> getCoinReturn()
 	{
-		return coinReturn;
+		return coinReturn.getCoinsReturned();
 	}
 	
 	public void insertCoin(ICoin coin)
@@ -66,7 +69,7 @@ public class VendingMachine
 		}
 		else
 		{
-			coinReturn.add(coin);
+			coinReturn.addCoin(coin);
 		}
 	}
 	
