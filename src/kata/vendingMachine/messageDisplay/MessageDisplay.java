@@ -15,16 +15,16 @@ public class MessageDisplay implements IMessageDisplay
 	
 	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 	
-	private boolean completedTransaction = false;
+	private boolean respondToUserInteraction = false;
 	
 	@Override
 	public String getMessage()
 	{
-		if(completedTransaction)
+		if(respondToUserInteraction)
 		{
-			completedTransaction = false;
+			String currentMessage = message;
 			message = INSERT_COINS;
-			return THANK_YOU;
+			return currentMessage;
 		}
 		return message;
 	}
@@ -39,12 +39,14 @@ public class MessageDisplay implements IMessageDisplay
 	public void completeTransaction()
 	{
 		currentMoney = ZERO;
-		completedTransaction = true;
+		respondToUserInteraction = true;
+		message = THANK_YOU;
 	}
 	
 	public void reportPrice(Double price)
 	{
 		message = PRICE + currencyFormat.format(price);
+		respondToUserInteraction = true;
 	}
 
 }
