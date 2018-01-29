@@ -69,6 +69,7 @@ public class MessageDisplay implements IMessageDisplay
 	public void reportSoldOut()
 	{
 		message = SOLD_OUT;
+		respondToUserInteraction = true;
 	}
 
 }
