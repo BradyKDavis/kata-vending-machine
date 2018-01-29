@@ -16,6 +16,7 @@ import kata.products.enums.ProductType;
 import kata.vendingMachine.coinReturn.ICoinReturn;
 import kata.vendingMachine.messageDisplay.IMessageDisplay;
 import kata.vendingMachine.productManager.IProductManager;
+import kata.vendingMachine.productStock.IProductStock;
 
 public class VendingMachine 
 {
@@ -35,13 +36,16 @@ public class VendingMachine
 	
 	private ICoinReturn coinReturn;
 	
+	private IProductStock productStock;
+	
 	@Inject
 	public VendingMachine(IMessageDisplay messageDisplay, IProductManager productManager,
-			ICoinReturn coinReturn)
+			ICoinReturn coinReturn, IProductStock productStock)
 	{
 		this.messageDisplay = messageDisplay;
 		this.productManager = productManager;
 		this.coinReturn = coinReturn;
+		this.productStock = productStock;
 	}
 	
 	public String getDisplayMessage()
@@ -79,21 +83,17 @@ public class VendingMachine
 		BigDecimal price = productManager.getItemPrice(product);
 		if(price.compareTo(currentCoinAmount) <= 0)
 		{
-			if(product == ProductType.COLA)
+			if(!productStock.hasProductInStock(product))
 			{
-				dispensedProduct = new ColaProduct();
+				
 			}
-			else if(product == ProductType.CHIPS)
+			else
 			{
-				dispensedProduct = new ChipProduct();
+				dispensedProduct = productStock.getProduct(product);
+				coinReturn.addChange(currentCoinAmount.subtract(dispensedProduct.getPrice()));
+				currentCoinAmount = NO_COINS;
+				messageDisplay.completeTransaction();
 			}
-			else if(product == ProductType.CANDY)
-			{
-				dispensedProduct = new CandyProduct();
-			}
-			coinReturn.addChange(currentCoinAmount.subtract(dispensedProduct.getPrice()));
-			currentCoinAmount = NO_COINS;
-			messageDisplay.completeTransaction();
 		}
 		else
 		{

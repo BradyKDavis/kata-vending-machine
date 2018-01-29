@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import kata.coins.Dime;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
+import kata.dependency.EmptyStockDependencyModule;
 import kata.dependency.KataDependencyModule;
 import kata.products.enums.ProductType;
 import kata.vendingMachine.VendingMachine;
@@ -34,7 +35,7 @@ public class SoldOutTestSuite
 	@Before
 	public void setUp() 
 	{
-		injector = Guice.createInjector(new KataDependencyModule());
+		injector = Guice.createInjector(new EmptyStockDependencyModule());
 		vendingMachine = injector.getInstance(VendingMachine.class);
 		nickel = new Nickel();
 		dime = new Dime();
