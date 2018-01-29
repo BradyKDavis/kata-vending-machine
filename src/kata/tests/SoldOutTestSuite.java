@@ -50,6 +50,15 @@ public class SoldOutTestSuite
 		assertNull(vendingMachine.getDispensedProduct());
 	}
 	
+	@Test
+	public void whenVendingMachineIsOutOfStockOfCandyAndCandyIsSelectedMessageDisplayReadsSoldOut()
+	{
+		insertMoney(new BigDecimal("0.65"));
+		vendingMachine.selectProduct(ProductType.CANDY);
+		assertNull(vendingMachine.getDispensedProduct());
+		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
+	}
+	
 	private void insertMoney(BigDecimal money)
 	{
 		while(money.compareTo(QUARTER_VALUE) >= 0)
