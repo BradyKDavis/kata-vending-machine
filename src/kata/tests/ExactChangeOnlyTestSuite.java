@@ -9,6 +9,7 @@ import kata.coins.ICoin;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
 import kata.dependency.LowCoinReturnModule;
+import kata.products.enums.ProductType;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
@@ -78,6 +79,7 @@ public class ExactChangeOnlyTestSuite
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
 	}
 	
+	@Test
 	public void testThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeTwentyFiveCents()
 	{
 		coins.add(dime);
@@ -88,10 +90,32 @@ public class ExactChangeOnlyTestSuite
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
 	}
 	
+	@Test
+	public void whenVendingMachineIsFedEnoughCoinsToProduceChangeItReadsInsertCoin()
+	{
+		coins.add(dime);
+		coins.add(quarter);
+		coins.add(nickel);
+		//cannot make 20 cents
+		setVendingMachineWithCoins();
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(nickel);
+		
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertNotNull(vendingMachine.getDispensedProduct());
+		//should be able to make 20 cents now that change has dispensed
+		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
+		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
+	}
+	
 	private void setVendingMachineWithCoins()
 	{
 		injector = Guice.createInjector(new LowCoinReturnModule(coins));
 		vendingMachine = injector.getInstance(VendingMachine.class);
 	}
+	
+	
 
 }

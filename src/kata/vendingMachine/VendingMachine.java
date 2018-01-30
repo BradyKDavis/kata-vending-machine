@@ -104,6 +104,7 @@ public class VendingMachine
 			coinReturn.addChange(currentCoinAmount.subtract(dispensedProduct.getPrice()));
 			currentCoinAmount = NO_COINS;
 			messageDisplay.completeTransaction();
+			setChangeAvailability();
 		}
 		else
 		{
