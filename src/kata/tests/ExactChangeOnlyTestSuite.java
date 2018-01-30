@@ -15,7 +15,6 @@ import org.junit.runners.MethodSorters;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ExactChangeOnlyTestSuite
 {
 	private Injector injector;
@@ -38,7 +37,7 @@ public class ExactChangeOnlyTestSuite
 	}
 
 	@Test
-	public void testAThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeFiveCents()
+	public void testThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeFiveCents()
 	{
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
 	}
