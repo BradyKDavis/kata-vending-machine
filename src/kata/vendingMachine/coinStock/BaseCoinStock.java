@@ -1,7 +1,6 @@
 package kata.vendingMachine.coinStock;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Stack;
 
 import com.google.inject.Inject;
@@ -12,7 +11,6 @@ import kata.vendingMachine.coinReader.ICoinReader;
 
 public class BaseCoinStock implements ICoinStock
 {
-	private static final BigDecimal MAX_TO_CHANGE = new BigDecimal(".50");
 	private static final BigDecimal ZERO = new BigDecimal("0");
 	private static final BigDecimal NICKEL_VALUE = new BigDecimal("0.05");
 	private static final BigDecimal DIME_VALUE = new BigDecimal("0.10");
@@ -37,10 +35,10 @@ public class BaseCoinStock implements ICoinStock
 	@Override
 	public boolean canMakeChange()
 	{
-		return hasChangeForCents(DIME_VALUE.add(DIME_VALUE));
+		return hasChangeForCentsRecursive(QUARTER_VALUE);
 	}
 	
-	private boolean hasChangeForCents(BigDecimal amount)
+	private boolean hasChangeForCentsRecursive(BigDecimal amount)
 	{
 		if(amount.equals(ZERO))
 		{
@@ -54,6 +52,11 @@ public class BaseCoinStock implements ICoinStock
 		{
 			BigDecimal cents = amount;
 			int i = 0;
+			while(cents.compareTo(QUARTER_VALUE) >= 0 && i < dimes.size())
+			{
+				cents = cents.subtract(QUARTER_VALUE);
+				i++;
+			}
 			while(cents.compareTo(DIME_VALUE) >= 0 && i < dimes.size())
 			{
 				cents = cents.subtract(DIME_VALUE);
@@ -65,7 +68,7 @@ public class BaseCoinStock implements ICoinStock
 				cents = cents.subtract(NICKEL_VALUE);
 				i++;
 			}
-			return cents.compareTo(ZERO) == 0 && hasChangeForCents(amount.subtract(NICKEL_VALUE));
+			return cents.compareTo(ZERO) == 0 && hasChangeForCentsRecursive(amount.subtract(NICKEL_VALUE));
 		}
 		return false;
 	}
