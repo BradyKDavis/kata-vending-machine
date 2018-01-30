@@ -145,6 +145,21 @@ public class ExactChangeOnlyTestSuite
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
 	}
 	
+	@Test
+	public void whenVendingMachineCannotMakeChangeAndSomebodyInsertsMoreThanAvailableToChangeTheMachineWilNotTryToMakeChangeAndWillNotDispenseProduct()
+	{
+		coins.add(dime);
+		coins.add(quarter);
+		//cannot change 5 or 15
+		setVendingMachineWithCoins();
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(dime);
+		vendingMachine.insertCoin(dime);
+		vendingMachine.selectProduct(ProductType.CHIPS);
+		assertNull(vendingMachine.getDispensedProduct());
+	}
+	
 	private void setVendingMachineWithCoins()
 	{
 		injector = Guice.createInjector(new LowCoinReturnModule(coins));
