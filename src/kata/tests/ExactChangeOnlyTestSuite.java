@@ -52,6 +52,15 @@ public class ExactChangeOnlyTestSuite
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
 	}
 	
+	@Test
+	public void testThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeTenCents()
+	{
+		coins.add(nickel);
+		coins.add(quarter);
+		setVendingMachineWithCoins();
+		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
+	}
+	
 	private void setVendingMachineWithCoins()
 	{
 		injector = Guice.createInjector(new LowCoinReturnModule(coins));
