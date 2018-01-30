@@ -58,6 +58,7 @@ public class ExactChangeOnlyTestSuite
 		coins.add(nickel);
 		coins.add(quarter);
 		setVendingMachineWithCoins();
+		
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
 	}
 	

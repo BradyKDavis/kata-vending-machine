@@ -9,6 +9,7 @@ import kata.vendingMachine.coinReader.KataCoinReader;
 import kata.vendingMachine.coinReturn.CoinReturn;
 import kata.vendingMachine.coinReturn.ICoinReturn;
 import kata.vendingMachine.coinStock.ICoinStock;
+import kata.vendingMachine.coinStock.InitialLoadedCoins;
 import kata.vendingMachine.coinStock.LoadableCoinStock;
 import kata.vendingMachine.messageDisplay.IMessageDisplay;
 import kata.vendingMachine.messageDisplay.MessageDisplay;
@@ -32,7 +33,7 @@ public class LowCoinReturnModule extends AbstractModule
 	@Override
 	protected void configure()
 	{
-		bind(new TypeLiteral<List<ICoin>>(){}).toInstance(initialCoins);
+		bind(new TypeLiteral<List<ICoin>>(){}).annotatedWith(InitialLoadedCoins.class).toInstance(initialCoins);
 		
 		bind(ICoinReader.class).to(KataCoinReader.class);
 		
