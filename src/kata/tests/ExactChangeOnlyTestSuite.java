@@ -1,10 +1,15 @@
 package kata.tests;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import kata.coins.Dime;
+import kata.coins.ICoin;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
 import kata.dependency.KataDependencyModule;
+import kata.dependency.LowCoinReturnModule;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
@@ -19,6 +24,8 @@ public class ExactChangeOnlyTestSuite
 {
 	private Injector injector;
 	
+	private ArrayList<ICoin> coins;
+	
 	private Nickel nickel;
 	private Dime dime;
 	private Quarter quarter;
@@ -29,8 +36,7 @@ public class ExactChangeOnlyTestSuite
 	@Before
 	public void setUp() throws Exception
 	{
-		injector = Guice.createInjector(new KataDependencyModule());
-		vendingMachine = injector.getInstance(VendingMachine.class);
+		coins = new ArrayList<ICoin>();
 		nickel = new Nickel();
 		dime = new Dime();
 		quarter = new Quarter();
@@ -39,7 +45,17 @@ public class ExactChangeOnlyTestSuite
 	@Test
 	public void testThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeFiveCents()
 	{
+		coins.add(dime);
+		coins.add(quarter);
+		setVendingMachineWithCoins();
+		//user can put 1.05 using quarters and dimes but cannot get a nickel back
 		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
+	}
+	
+	private void setVendingMachineWithCoins()
+	{
+		injector = Guice.createInjector(new LowCoinReturnModule(coins));
+		vendingMachine = injector.getInstance(VendingMachine.class);
 	}
 
 }

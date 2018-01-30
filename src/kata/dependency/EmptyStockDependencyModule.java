@@ -22,6 +22,8 @@ public class EmptyStockDependencyModule extends AbstractModule
 	{
 		bind(ICoinReader.class).to(KataCoinReader.class);
 		
+		bind(ICoinStock.class).to(PreloadedCoinStock.class);
+		
 		bind(IProductStock.class).to(EmptyProductStock.class);
 		
 		bind(IMessageDisplay.class).to(MessageDisplay.class);

@@ -8,12 +8,15 @@ public class MessageDisplay implements IMessageDisplay
 	private static final String INSERT_COIN = "INSERT COIN";
 	private static final String THANK_YOU = "THANK YOU";
 	private static final String SOLD_OUT = "SOLD OUT";
+	private static final String EXACT_CHANGE_ONLY = "EXACT CHANGE ONLY";
 	private static final String PRICE = "PRICE ";
 	private static final BigDecimal ZERO = new BigDecimal("0.00");
 	
 	private BigDecimal currentMoney = ZERO;
 	
-	private String message = INSERT_COIN;
+	private String zeroCoinsMessage = INSERT_COIN;
+	private String message = zeroCoinsMessage;
+	
 	
 	private DecimalFormat currencyFormat = new DecimalFormat("0.00");
 	
@@ -31,7 +34,7 @@ public class MessageDisplay implements IMessageDisplay
 			}
 			else
 			{
-				message = INSERT_COIN;
+				message = zeroCoinsMessage;
 			}
 			return currentMessage;
 		}
@@ -62,7 +65,7 @@ public class MessageDisplay implements IMessageDisplay
 	public void cancelTransaction()
 	{
 		currentMoney = ZERO;
-		message = INSERT_COIN;
+		message = zeroCoinsMessage;
 	}
 
 	@Override
@@ -70,6 +73,29 @@ public class MessageDisplay implements IMessageDisplay
 	{
 		message = SOLD_OUT;
 		respondToUserInteraction = true;
+	}
+
+	@Override
+	public void reportCanOfferChange(boolean value)
+	{
+		String newMessage;
+		if(value)
+		{
+			newMessage = INSERT_COIN;
+		}
+		else
+		{
+			newMessage = EXACT_CHANGE_ONLY;
+		}
+		if(message.equals(zeroCoinsMessage))
+		{
+			message = zeroCoinsMessage = newMessage;
+		}
+		else
+		{
+			zeroCoinsMessage = newMessage;
+		}
+
 	}
 
 }

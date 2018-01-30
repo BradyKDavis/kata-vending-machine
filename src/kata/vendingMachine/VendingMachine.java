@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import com.google.inject.Inject;
 
 import kata.coins.ICoin;
-import kata.coins.enums.CoinSize;
-import kata.coins.enums.CoinWeight;
-import kata.products.CandyProduct;
-import kata.products.ChipProduct;
-import kata.products.ColaProduct;
+import kata.coins.enums.CoinType;
 import kata.products.IProduct;
 import kata.products.enums.ProductType;
+import kata.vendingMachine.coinReader.ICoinReader;
 import kata.vendingMachine.coinReturn.ICoinReturn;
+import kata.vendingMachine.coinStock.ICoinStock;
 import kata.vendingMachine.messageDisplay.IMessageDisplay;
 import kata.vendingMachine.productManager.IProductManager;
 import kata.vendingMachine.productStock.IProductStock;
@@ -27,7 +25,6 @@ public class VendingMachine
 	
 	private BigDecimal currentCoinAmount = NO_COINS;
 	
-	
 	private IProduct dispensedProduct = null;
 	
 	private IMessageDisplay messageDisplay;
@@ -38,16 +35,26 @@ public class VendingMachine
 	
 	private IProductStock productStock;
 	
+	private ICoinReader coinReader;
+	
+	private ICoinStock coinStock;
+	
 	@Inject
 	public VendingMachine(IMessageDisplay messageDisplay, IProductManager productManager,
-			ICoinReturn coinReturn, IProductStock productStock)
+			ICoinReturn coinReturn, IProductStock productStock, 
+			ICoinReader coinReader, ICoinStock coinStock)
 	{
 		this.messageDisplay = messageDisplay;
 		this.productManager = productManager;
 		this.coinReturn = coinReturn;
 		this.productStock = productStock;
+		this.coinReader = coinReader;
+		this.coinStock = coinStock;
+		setChangeAvailability();
 	}
 	
+
+
 	public String getDisplayMessage()
 	{
 		return messageDisplay.getMessage();
@@ -60,15 +67,21 @@ public class VendingMachine
 	
 	public void insertCoin(ICoin coin)
 	{
-		if(isNickel(coin))
+		CoinType type = coinReader.getCoinType(coin);
+		if(type != CoinType.OTHER)
 		{
+			coinStock.addCoin(coin);
+		}
+		if(type == CoinType.NICKEL)
+		{
+			coinStock.addCoin(coin);
 			addMoney(NICKEL);
 		}
-		else if(isDime(coin))
+		else if(type == CoinType.DIME)
 		{
 			addMoney(DIME);
 		}
-		else if(isQuarter(coin))
+		else if(type == CoinType.QUARTER)
 		{
 			addMoney(QUARTER);
 		}
@@ -108,21 +121,6 @@ public class VendingMachine
 		currentCoinAmount = currentCoinAmount.add(money);
 		messageDisplay.addMoney(money);
 	}
-	
-	private boolean isNickel(ICoin coin)
-	{
-		return coin.getCoinSize() == CoinSize.NICKEL && coin.getCoinWeight() == CoinWeight.NICKEL;
-	}
-	
-	private boolean isDime(ICoin coin)
-	{
-		return coin.getCoinSize() == CoinSize.DIME && coin.getCoinWeight() == CoinWeight.DIME;
-	}
-	
-	private boolean isQuarter(ICoin coin)
-	{
-		return coin.getCoinSize() == CoinSize.QUARTER && coin.getCoinWeight() == CoinWeight.QUARTER;
-	}
 
 	public void returnCoins()
 	{
@@ -131,5 +129,10 @@ public class VendingMachine
 		messageDisplay.cancelTransaction();
 	}
 
+	private void setChangeAvailability()
+	{
+		boolean value = coinStock.canMakeChange();
+		messageDisplay.reportCanOfferChange(value);
+	}
 
 }

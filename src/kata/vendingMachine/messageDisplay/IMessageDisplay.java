@@ -15,4 +15,6 @@ public interface IMessageDisplay
 	void cancelTransaction();
 
 	void reportSoldOut();
+	
+	void reportCanOfferChange(boolean value);
 }
