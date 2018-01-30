@@ -8,14 +8,11 @@ import kata.coins.Dime;
 import kata.coins.ICoin;
 import kata.coins.Nickel;
 import kata.coins.Quarter;
-import kata.dependency.KataDependencyModule;
 import kata.dependency.LowCoinReturnModule;
 import kata.vendingMachine.VendingMachine;
 
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -72,6 +69,16 @@ public class ExactChangeOnlyTestSuite
 	}
 	
 	public void testThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeTwentyCents()
+	{
+		coins.add(dime);
+		coins.add(nickel);
+		coins.add(quarter);
+		setVendingMachineWithCoins();
+		
+		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
+	}
+	
+	public void testThatVendingMachineDisplaysExactChangeWhenMachineCannotChangeTwentyFiveCents()
 	{
 		coins.add(dime);
 		coins.add(nickel);
