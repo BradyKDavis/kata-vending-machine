@@ -2,8 +2,6 @@ package kata.dependency;
 
 import kata.vendingMachine.coinReader.ICoinReader;
 import kata.vendingMachine.coinReader.KataCoinReader;
-import kata.vendingMachine.coinReturn.CoinReturn;
-import kata.vendingMachine.coinReturn.ICoinReturn;
 import kata.vendingMachine.coinStock.ICoinStock;
 import kata.vendingMachine.coinStock.PreloadedCoinStock;
 import kata.vendingMachine.messageDisplay.IMessageDisplay;
@@ -30,8 +28,6 @@ public class KataDependencyModule extends AbstractModule
 		bind(IMessageDisplay.class).to(MessageDisplay.class);
 		
 		bind(IProductManager.class).to(KataProductManager.class);
-		
-		bind(ICoinReturn.class).to(CoinReturn.class);
 	}
 
 }

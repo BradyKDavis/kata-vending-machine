@@ -1,6 +1,8 @@
 package kata.vendingMachine.coinStock;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import com.google.inject.Inject;
@@ -90,6 +92,29 @@ public class BaseCoinStock implements ICoinStock
 		{
 			quarters.push(coin);
 		}
+	}
+
+
+	@Override
+	public ArrayList<ICoin> getChangeForAmount(BigDecimal amount)
+	{
+		ArrayList<ICoin> coins = new ArrayList<ICoin>();
+		while(amount.compareTo(QUARTER_VALUE) >= 0)
+		{
+			amount = amount.subtract(QUARTER_VALUE);
+			coins.add(quarters.pop());
+		}
+		while(amount.compareTo(DIME_VALUE) >= 0)
+		{
+			amount = amount.subtract(DIME_VALUE);
+			coins.add(dimes.pop());
+		}
+		while(amount.compareTo(NICKEL_VALUE) >= 0)
+		{
+			amount = amount.subtract(NICKEL_VALUE);
+			coins.add(nickels.pop());
+		}
+		return coins;
 	}
 
 }

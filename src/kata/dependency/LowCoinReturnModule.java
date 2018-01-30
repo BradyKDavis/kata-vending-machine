@@ -6,8 +6,6 @@ import java.util.List;
 import kata.coins.ICoin;
 import kata.vendingMachine.coinReader.ICoinReader;
 import kata.vendingMachine.coinReader.KataCoinReader;
-import kata.vendingMachine.coinReturn.CoinReturn;
-import kata.vendingMachine.coinReturn.ICoinReturn;
 import kata.vendingMachine.coinStock.ICoinStock;
 import kata.vendingMachine.coinStock.InitialLoadedCoins;
 import kata.vendingMachine.coinStock.LoadableCoinStock;
@@ -44,8 +42,6 @@ public class LowCoinReturnModule extends AbstractModule
 		bind(IMessageDisplay.class).to(MessageDisplay.class);
 		
 		bind(IProductManager.class).to(KataProductManager.class);
-		
-		bind(ICoinReturn.class).to(CoinReturn.class);
 	}
 
 }
