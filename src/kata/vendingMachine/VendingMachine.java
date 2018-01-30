@@ -97,12 +97,20 @@ public class VendingMachine
 		}
 		else if(price.compareTo(currentCoinAmount) <= 0)
 		{
-			dispensedProduct = productStock.getProduct(product);
-			ArrayList<ICoin> coins = coinStock.getChangeForAmount(currentCoinAmount.subtract(dispensedProduct.getPrice()));
-			coinReturn.addAll(coins);
-			currentCoinAmount = NO_COINS;
-			messageDisplay.completeTransaction();
-			setChangeAvailability();
+			if(currentCoinAmount.compareTo(price) > 0)
+			{
+				if(coinStock.canMakeChange())
+				{	
+					BigDecimal change = currentCoinAmount.subtract(price);
+					finalizeTransaction(product);
+					ArrayList<ICoin> coins = coinStock.getChangeForAmount(change);
+					coinReturn.addAll(coins);
+				}
+			}
+			else
+			{
+				finalizeTransaction(product);
+			}
 		}
 		else
 		{
@@ -133,6 +141,14 @@ public class VendingMachine
 	{
 		boolean value = coinStock.canMakeChange();
 		messageDisplay.reportCanOfferChange(value);
+	}
+	
+	private void finalizeTransaction(ProductType product)
+	{
+		dispensedProduct = productStock.getProduct(product);
+		currentCoinAmount = NO_COINS;
+		messageDisplay.completeTransaction();
+		setChangeAvailability();
 	}
 
 }
