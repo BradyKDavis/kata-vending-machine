@@ -110,6 +110,24 @@ public class ExactChangeOnlyTestSuite
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
+	@Test public void whenVendingMachineIsNotFedEnoughCoinsToProduceChangeItReadsExactChangeOnly()
+	{
+		coins.add(dime);
+		coins.add(dime);
+		coins.add(quarter);
+		//cannot make 5 or 15 cents
+		setVendingMachineWithCoins();
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.insertCoin(quarter);
+		vendingMachine.selectProduct(ProductType.COLA);
+		assertNotNull(vendingMachine.getDispensedProduct());
+		//still can not make 5 or 15 cents
+		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
+		assertEquals("EXACT CHANGE ONLY", vendingMachine.getDisplayMessage());
+	}
+	
 	private void setVendingMachineWithCoins()
 	{
 		injector = Guice.createInjector(new LowCoinReturnModule(coins));
