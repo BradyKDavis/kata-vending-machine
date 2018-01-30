@@ -37,7 +37,7 @@ public class BaseCoinStock implements ICoinStock
 	@Override
 	public boolean canMakeChange()
 	{
-		return hasChangeForCents(DIME_VALUE.add(NICKEL_VALUE));
+		return hasChangeForCents(DIME_VALUE.add(DIME_VALUE));
 	}
 	
 	private boolean hasChangeForCents(BigDecimal amount)
