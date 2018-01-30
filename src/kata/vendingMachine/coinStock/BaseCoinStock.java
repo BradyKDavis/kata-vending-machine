@@ -1,5 +1,6 @@
 package kata.vendingMachine.coinStock;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Stack;
 
@@ -11,6 +12,12 @@ import kata.vendingMachine.coinReader.ICoinReader;
 
 public class BaseCoinStock implements ICoinStock
 {
+	private static final BigDecimal MAX_TO_CHANGE = new BigDecimal(".50");
+	
+	private static final BigDecimal NICKEL_VALUE = new BigDecimal("0.05");
+	private static final BigDecimal DIME_VALUE = new BigDecimal("0.10");
+	private static final BigDecimal QUARTER_VALUE = new BigDecimal("0.25");
+	
 	protected Stack<ICoin> nickels;
 	protected Stack<ICoin> dimes;
 	protected Stack<ICoin> quarters;
@@ -30,7 +37,25 @@ public class BaseCoinStock implements ICoinStock
 	@Override
 	public boolean canMakeChange()
 	{
-		return !nickels.empty();
+		return hasChangeForCents(DIME_VALUE);
+	}
+	
+	private boolean hasChangeForCents(BigDecimal amount)
+	{
+		if(amount.equals(new BigDecimal("0")))
+		{
+			return true;
+		}
+		if(amount.equals(NICKEL_VALUE))
+		{
+			return !nickels.empty();
+		}
+		else if(amount.equals(DIME_VALUE))
+		{
+			return (!dimes.empty()) 
+					&& hasChangeForCents(amount.subtract(NICKEL_VALUE));
+		}
+		return false;
 	}
 
 
