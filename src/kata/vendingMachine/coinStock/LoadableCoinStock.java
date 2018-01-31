@@ -1,10 +1,8 @@
 package kata.vendingMachine.coinStock;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.Inject;
-import com.google.inject.TypeLiteral;
 
 import kata.coins.ICoin;
 import kata.vendingMachine.coinReader.ICoinReader;

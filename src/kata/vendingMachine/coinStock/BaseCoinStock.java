@@ -2,7 +2,6 @@ package kata.vendingMachine.coinStock;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import com.google.inject.Inject;
