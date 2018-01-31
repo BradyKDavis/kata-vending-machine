@@ -1,4 +1,4 @@
-package kata.tests;
+package test;
 
 import static org.junit.Assert.*;
 
