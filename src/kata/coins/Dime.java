@@ -5,6 +5,7 @@ import kata.coins.enums.CoinWeight;
 
 public class Dime extends AbstractCoin
 {
+	private static final String NAME = "dime";
 
 	@Override
 	public CoinSize getCoinSize() 
@@ -17,5 +18,10 @@ public class Dime extends AbstractCoin
 	{
 		return CoinWeight.DIME;
 	}
-
+	
+	@Override 
+	public String toString()
+	{
+		return NAME;
+	}
 }

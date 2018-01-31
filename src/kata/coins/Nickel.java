@@ -5,7 +5,7 @@ import kata.coins.enums.CoinWeight;
 
 public class Nickel extends AbstractCoin
 {
-
+	private static final String NAME = "nickel";
 	@Override
 	public CoinSize getCoinSize() 
 	{
@@ -18,4 +18,10 @@ public class Nickel extends AbstractCoin
 		return CoinWeight.NICKEL;
 	}
 
+	@Override 
+	public String toString()
+	{
+		return NAME;
+	}
+	
 }

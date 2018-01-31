@@ -63,6 +63,11 @@ public class VendingMachine
 		return coinReturn;
 	}
 	
+	public void emptyCoinReturn()
+	{
+		coinReturn.clear();
+	}
+	
 	public void insertCoin(ICoin coin)
 	{
 		CoinType type = coinReader.getCoinType(coin);
@@ -121,6 +126,11 @@ public class VendingMachine
 	public IProduct getDispensedProduct()
 	{
 		return dispensedProduct;
+	}
+	
+	public void removeDispensedProduct()
+	{
+		dispensedProduct = null;
 	}
 	
 	private void addMoney(BigDecimal money)

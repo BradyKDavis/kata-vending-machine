@@ -6,7 +6,8 @@ import kata.products.enums.ProductType;
 
 public class ChipProduct implements IProduct
 {
-	private final BigDecimal price = new BigDecimal(".50");
+	private static final String NAME = "Kata Chips";
+	private static final BigDecimal price = new BigDecimal(".50");
 	@Override
 	public ProductType getProductType()
 	{
@@ -16,6 +17,12 @@ public class ChipProduct implements IProduct
 	public BigDecimal getPrice()
 	{
 		return price;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return NAME;
 	}
 
 }

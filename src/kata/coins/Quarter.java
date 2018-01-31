@@ -5,7 +5,7 @@ import kata.coins.enums.CoinWeight;
 
 public class Quarter extends AbstractCoin 
 {
-
+	private static final String NAME = "quarter";
 	@Override
 	public CoinSize getCoinSize() 
 	{
@@ -16,6 +16,12 @@ public class Quarter extends AbstractCoin
 	public CoinWeight getCoinWeight() 
 	{
 		return CoinWeight.QUARTER;
+	}
+	
+	@Override 
+	public String toString()
+	{
+		return NAME;
 	}
 
 }
