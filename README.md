@@ -1,6 +1,7 @@
 Brady Davis Vending Machine Kata Submission
 ===========================================
 Language Used: Java
+
 Libraries Used; Guava, Guice, JUnit, Javax.inject, AOPAlliance
 
 Maven:
