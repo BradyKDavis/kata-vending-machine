@@ -1,3 +1,11 @@
+Brady Davis Vending Machine Kata Submission
+===========================================
+Language Used: Java
+Libraries Used; Guava, Guice, JUnit, Javax.inject, AOPAlliance
+
+Maven:
+To run unit tests, run "mvn test" at top level
+
 Vending Machine Kata
 ====================
 
