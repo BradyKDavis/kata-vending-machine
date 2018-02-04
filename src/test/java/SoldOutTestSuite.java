@@ -44,16 +44,24 @@ public class SoldOutTestSuite
 	@Test
 	public void whenVendingMachineIsOutOfStockOfColaAndColaIsSelectedNoColaIsDispensed()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("1.00"));
 		vendingMachine.selectProduct(ProductType.COLA);
+		
+		//assert
 		assertNull(vendingMachine.getDispensedProduct());
 	}
 	
 	@Test
 	public void whenVendingMachineIsOutOfStockOfCandyAndCandyIsSelectedMessageDisplayReadsSoldOut()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.65"));
 		vendingMachine.selectProduct(ProductType.CANDY);
+		
+		//assert
 		assertNull(vendingMachine.getDispensedProduct());
 		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
 	}
@@ -61,7 +69,11 @@ public class SoldOutTestSuite
 	@Test 
 	public void whenVendingMachineIsOutOfStockAndNoCoinsAreInsertedMessageDisplayReadsSoldOutNotPrice()
 	{
+		//arrange
+		//act
 		vendingMachine.selectProduct(ProductType.CHIPS);
+		
+		//assert
 		assertNull(vendingMachine.getDispensedProduct());
 		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
 	}
@@ -69,7 +81,11 @@ public class SoldOutTestSuite
 	@Test
 	public void whenVendingMachineIsOutOfStockAndNoCoinsInsertedSelectCoinsReadsAfterSoldOut()
 	{
+		//arrange
+		//act
 		vendingMachine.selectProduct(ProductType.CHIPS);
+		
+		//assert
 		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
@@ -77,12 +93,17 @@ public class SoldOutTestSuite
 	@Test
 	public void whenVendingMachineIsOutOfStockAndCoinsInsertedCoinAmountReadsAfterSoldOut()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(quarter);
 		vendingMachine.selectProduct(ProductType.CANDY);
+		
+		//assert
 		assertEquals("SOLD OUT", vendingMachine.getDisplayMessage());
 		assertEquals("0.25", vendingMachine.getDisplayMessage());
 	}
 	
+	//convenience method
 	private void insertMoney(BigDecimal money)
 	{
 		while(money.compareTo(QUARTER_VALUE) >= 0)

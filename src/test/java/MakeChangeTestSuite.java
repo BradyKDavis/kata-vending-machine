@@ -51,41 +51,58 @@ public class MakeChangeTestSuite
 	@Test
 	public void whenProductPurchasedWithNickelOverCoinReturnContainsNickel()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.55"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		coins.add(nickel);
+		
+		//assert
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 	
 	@Test
 	public void whenProductPurchasedWithDimeOverCoinReturnContainsDime()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("1.10"));
 		vendingMachine.selectProduct(ProductType.COLA);
 		coins.add(dime);
+		
+		//assert
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 	
 	@Test
 	public void whenProductPurchasedWithQuarterOverCoinReturnContainsQuarter()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal(".90"));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		coins.add(quarter);
+		
+		//assert
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 	
 	@Test
 	public void whenProductPurchasedWithMultipleCoinsOverCoinReturnReturnsThoseCoins()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("1.45"));
 		vendingMachine.selectProduct(ProductType.COLA);
 		coins.add(quarter);
 		coins.add(dime);
 		coins.add(dime);
+		
+		//assert
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 	
+	//convenience method
 	private void insertMoney(BigDecimal money)
 	{
 		while(money.compareTo(QUARTER_VALUE) >= 0)

@@ -53,20 +53,31 @@ public class AcceptCoinsTestSuite
 	@Test
 	public void whenVendingMachineHasNoCoinsInsertedDisplayShowsINSERTCOIN() 
 	{
+		//arrange
+		//act
+		//assert
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void whenVendingMachineAcceptsANickelItUpdatesDisplayToShow5Cents()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(nickel);
+		
+		//assert
 		assertEquals("0.05", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void whenVendingMachineAcceptsADimeItUpdatesDisplayToShow10Cents()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(dime);
+		
+		//assert
 		assertEquals("0.10", vendingMachine.getDisplayMessage());
 	}
 
@@ -74,13 +85,19 @@ public class AcceptCoinsTestSuite
 	@Test
 	public void whenVendingMachineAcceptsAQuarterItUpdatesDisplayToShow25Cents()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(quarter);
+		
+		//assert
 		assertEquals("0.25", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineAcceptsMultipleDifferentCoinsAndUpdatesDisplayToCorrectTotal()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(dime);
 		vendingMachine.insertCoin(quarter);
 		vendingMachine.insertCoin(quarter);
@@ -88,40 +105,59 @@ public class AcceptCoinsTestSuite
 		vendingMachine.insertCoin(nickel);
 		vendingMachine.insertCoin(dime);
 		vendingMachine.insertCoin(quarter);
+		
+		//assert
 		assertEquals("1.10", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineDoesNotAcceptPenniesAndDoesNotIncreaseInValueWhenPennyAdded()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(penny);
+		
+		//assert
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineDoesNotAcceptFakeQuarter()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(fakeQuarter);
+		
+		//assert
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineDoesNotAcceptFakeNickel()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(fakeNickel);
+		
+		//assert
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachineDoesNotAcceptFakeDime()
 	{
+		//arrange
+		//act
 		vendingMachine.insertCoin(fakeDime);
+		
+		//assert
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void vendingMachinePlacesUnacceptedCoinsIntoTheCoinReturn()
 	{
+		//arrange
 		ArrayList<ICoin> coins = new ArrayList<ICoin>();
 		coins.add(fakeQuarter);
 		coins.add(fakeDime);
@@ -131,7 +167,11 @@ public class AcceptCoinsTestSuite
 		{
 			vendingMachine.insertCoin(coin);
 		}
+		
+		//act
 		vendingMachine.insertCoin(nickel);
+		
+		//assert
 		assertArrayEquals(coins.toArray(), vendingMachine.getCoinReturn().toArray());
 	}
 }

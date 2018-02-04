@@ -45,6 +45,7 @@ public class SelectProductTestSuite
 		nickel = new Nickel();
 	}
 	
+	//convenience method
 	private void insertMoney(BigDecimal money)
 	{
 		while(money.compareTo(QUARTER_VALUE) >= 0)
@@ -67,9 +68,13 @@ public class SelectProductTestSuite
 	@Test
 	public void dispenseProductForColaWithOneDollarDispensesCola() 
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("1.00"));
 		vendingMachine.selectProduct(ProductType.COLA);
 		product = vendingMachine.getDispensedProduct();
+		
+		//assert
 		assertNotNull(product);
 		assertEquals(ProductType.COLA, product.getProductType());
 	}
@@ -77,9 +82,13 @@ public class SelectProductTestSuite
 	@Test 
 	public void dispenseProductForChipsWithFiftyCentsDispensesChips()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.50"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
 		product = vendingMachine.getDispensedProduct();
+		
+		//assert
 		assertNotNull(product);
 		assertEquals(ProductType.CHIPS, product.getProductType());
 	}
@@ -87,9 +96,13 @@ public class SelectProductTestSuite
 	@Test
 	public void dispenseProductForCandyWithSixtyCentsDispensesCandy()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.65"));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		product = vendingMachine.getDispensedProduct();
+		
+		//assert
 		assertNotNull(product);
 		assertEquals(ProductType.CANDY, product.getProductType());
 	}
@@ -97,44 +110,70 @@ public class SelectProductTestSuite
 	@Test
 	public void whenProductHasDispensedVendingMachineReadsThankYou()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("1.00"));
 		vendingMachine.selectProduct(ProductType.COLA);
+		
+		//assert
 		assertEquals("THANK YOU", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void afterVendingMachineReadsThankYouItThenReadsInsertCoin()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.65"));
 		vendingMachine.selectProduct(ProductType.CANDY);
 		vendingMachine.getDisplayMessage();
+		
+		//assert
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void ifInsufficientMoneyProvidedForProductThenProductIsNotDispensed()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.40"));
 		vendingMachine.selectProduct(ProductType.CANDY);
+		
+		//assert
 		assertNull(vendingMachine.getDispensedProduct());
+		
+		//act
 		vendingMachine.selectProduct(ProductType.CHIPS);
+		//assert
 		assertNull(vendingMachine.getDispensedProduct());
+		
+		//act
 		vendingMachine.selectProduct(ProductType.COLA);
+		//assert
 		assertNull(vendingMachine.getDispensedProduct());
 	}
 	
 	@Test
 	public void ifInsufficientMoneyProviedForProductThenDisplaysProductPrice()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.40"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
+		
+		//assert
 		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
 	}
 	
 	@Test
 	public void afterProductPriceDisplayedWithZeroMoneyInsertCoinIsDisplayed()
 	{
+		//arrange
+		//act
 		vendingMachine.selectProduct(ProductType.CANDY);
+		
+		//assert
 		assertEquals("PRICE 0.65", vendingMachine.getDisplayMessage());
 		assertEquals("INSERT COIN", vendingMachine.getDisplayMessage());
 	}
@@ -142,8 +181,12 @@ public class SelectProductTestSuite
 	@Test
 	public void afterProductPriceDisplayedWithMoneyInsertedCurrentBalanceIsDisplayed()
 	{
+		//arrange
+		//act
 		insertMoney(new BigDecimal("0.40"));
 		vendingMachine.selectProduct(ProductType.CHIPS);
+		
+		//assert
 		assertEquals("PRICE 0.50", vendingMachine.getDisplayMessage());
 		assertEquals("0.40", vendingMachine.getDisplayMessage());
 	}
