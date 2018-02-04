@@ -1,3 +1,15 @@
+Brady Davis Vending Machine Kata Submission
+===========================================
+Language Used: Java (1.8)
+
+Libraries Used; Guava, Guice, JUnit, Javax.inject, AOPAlliance
+
+Maven:
+To run unit tests, run "mvn clean test" at top level
+
+To compile main program, run "mvn clean compile assembly:single".
+The resulting jar should compile to the "target" library.
+
 Vending Machine Kata
 ====================
 
